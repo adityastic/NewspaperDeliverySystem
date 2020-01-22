@@ -4,6 +4,10 @@ jdk: openjdk8
 services:
   - mysql
 
+cache:
+  directories:
+    - ~/.m2
+
 before_install:
   - mysql -e 'CREATE DATABASE newspaper_delivery;'
 
