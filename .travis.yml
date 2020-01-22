@@ -4,5 +4,8 @@ jdk: openjdk8
 services:
   - mysql
 
+before_install:
+  - mysql -e 'CREATE DATABASE newspaper_delivery;'
+
 script:
   - ./mvnw clean install -B
