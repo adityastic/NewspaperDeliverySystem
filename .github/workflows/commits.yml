@@ -13,10 +13,8 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Start MySQL
-        uses: samin/mysql-action@v1.3
-        with:
-          mysql root password: ''
-
+      - name: Setup MySQL
+        run: mysql -e 'CREATE DATABASE newspaper_delivery;'
+        
       - name: Build Project
-        run: mvn -B package --file pom.xml
+        run: ./mvnw clean install -B
