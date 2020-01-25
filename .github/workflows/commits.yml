@@ -27,6 +27,6 @@ jobs:
         run: ./mvnw clean install -B
         
       - name: Slack Notification
-        uses: rtCamp/action-slack-notify@master
+        uses: adityastic/action-slack-notify@master
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
