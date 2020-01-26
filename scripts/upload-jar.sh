@@ -3,7 +3,7 @@
 git config --global user.name "Aditya Gupta"
 git config --global user.email "adityaofficialgupta@gmail.com"
 
-git clone --quiet --branch=jar https://adityastic:$GITHUB_KEY@github.com/adityastic/NewspaperDeliverySystem jar > /dev/null
+git clone --quiet --branch=jar https://adityastic:$GITHUB_TOKEN@github.com/adityastic/NewspaperDeliverySystem jar > /dev/null
 cd jar
 
 rm -rf $BRANCH_NAME*
