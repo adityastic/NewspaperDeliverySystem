@@ -31,7 +31,7 @@ jobs:
         run: ./mvnw spotless:check
 
       - name: Build Project
-        run: ./mvnw clean build
+        run: ./mvnw -B clean package
 
       - name: Extract branch name
         shell: bash
