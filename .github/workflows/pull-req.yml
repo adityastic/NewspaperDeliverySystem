@@ -1,4 +1,4 @@
-name: PR CI
+name: Github Actions CI
 
 on:
   push:
@@ -26,6 +26,9 @@ jobs:
 
       - name: Setup MySQL
         run: mysql -uroot -p'root' -e 'CREATE DATABASE newspaper_delivery;'
-        
+
+      - name: Check Code Format
+        run: ./mvnw spotless:check
+
       - name: Build Project
-        run: ./mvnw clean test
+        run: ./mvnw -B clean package
