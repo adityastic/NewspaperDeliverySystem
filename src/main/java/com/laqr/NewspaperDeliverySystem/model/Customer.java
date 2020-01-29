@@ -1,33 +1,36 @@
 package com.laqr.NewspaperDeliverySystem.model;
 
+import com.mysql.cj.xdevapi.JsonArray;
 
 import javax.persistence.*;
 
 @Entity
-@Table (name = "customers")
+@Table(name = "customers")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column (name = "full_name")
+    @Column(name = "full_name")
     private String fullName;
 
     private String address;
 
-    @Column (name = "phone_no")
+    @Column(name = "phone_no")
     private Integer phoneNo;
 
-    private String subscription;
+    @Column(columnDefinition = "json")
+    private JsonArray subscription;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "route", referencedColumnName = "id")
     private Route route;
 
-    private String holiday;
+    @Column(columnDefinition = "json")
+    private JsonArray holiday;
 
-    public Customer(String fullName, String address, Integer phoneNo, String subscription, Route route, String holiday) {
+    public Customer(String fullName, String address, Integer phoneNo, JsonArray subscription, Route route, JsonArray holiday) {
         this.fullName = fullName;
         this.address = address;
         this.phoneNo = phoneNo;
@@ -72,11 +75,11 @@ public class Customer {
         return this;
     }
 
-    public String getSubscription() {
+    public JsonArray getSubscription() {
         return subscription;
     }
 
-    public Customer setSubscription(String subscription) {
+    public Customer setSubscription(JsonArray subscription) {
         this.subscription = subscription;
         return this;
     }
@@ -90,11 +93,11 @@ public class Customer {
         return this;
     }
 
-    public String getHoliday() {
+    public JsonArray getHoliday() {
         return holiday;
     }
 
-    public Customer setHoliday(String holiday) {
+    public Customer setHoliday(JsonArray holiday) {
         this.holiday = holiday;
         return this;
     }

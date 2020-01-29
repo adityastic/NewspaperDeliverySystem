@@ -1,10 +1,9 @@
 package com.laqr.NewspaperDeliverySystem.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
-@Table (name = "products")
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,13 +16,13 @@ public class Product {
 
     private String frequency;
 
-    @Column (name = "day_of_week")
+    @Column(name = "day_of_week")
     private Integer dayOfWeek;
 
-    @Column (name = "selling_cost")
+    @Column(name = "selling_cost")
     private Double sellingCost;
 
-    @Column (name = "buying_cost")
+    @Column(name = "buying_cost")
     private Double buyingCost;
 
     public Product(String name, ProductType type, String frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
