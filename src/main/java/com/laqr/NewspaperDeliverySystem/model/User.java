@@ -14,12 +14,9 @@ public class User {
 
     private String password;
 
-    private String type;
-
-    public User(String username, String password, String type) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.type = type;
     }
 
     public Integer getId() {
@@ -46,15 +43,6 @@ public class User {
 
     public User setPassword(String password) {
         this.password = password;
-        return this;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public User setType(String type) {
-        this.type = type;
         return this;
     }
 }
