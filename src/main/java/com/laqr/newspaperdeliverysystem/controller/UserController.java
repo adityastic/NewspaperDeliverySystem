@@ -1,4 +1,4 @@
-package com.laqr.NewspaperDeliverySystem.controller;
+package com.laqr.newspaperdeliverysystem.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

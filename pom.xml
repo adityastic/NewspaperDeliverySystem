@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.laqr</groupId>
-    <artifactId>NewspaperDeliverySystem</artifactId>
+    <artifactId>newspaperdeliverysystem</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>NewspaperDeliverySystem</name>
     <description>Newspaper Delivery System</description>

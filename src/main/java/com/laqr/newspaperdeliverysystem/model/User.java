@@ -1,6 +1,10 @@
-package com.laqr.NewspaperDeliverySystem.model;
+package com.laqr.newspaperdeliverysystem.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 @Table(name = "user_details")

@@ -1,4 +1,4 @@
-package com.laqr.NewspaperDeliverySystem.model;
+package com.laqr.newspaperdeliverysystem.model;
 
 import com.mysql.cj.xdevapi.JsonArray;
 

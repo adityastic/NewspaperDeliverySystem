@@ -1,6 +1,6 @@
-package com.laqr.NewspaperDeliverySystem.repository;
+package com.laqr.newspaperdeliverysystem.repository;
 
-import com.laqr.NewspaperDeliverySystem.model.User;
+import com.laqr.newspaperdeliverysystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

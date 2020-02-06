@@ -1,4 +1,4 @@
-package com.laqr.NewspaperDeliverySystem.model;
+package com.laqr.newspaperdeliverysystem.model;
 
 public enum ProductType {
     NEWSPAPER,
