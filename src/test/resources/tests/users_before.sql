@@ -1,0 +1,1 @@
+INSERT IGNORE INTO user_details VALUES (100, 'lorraine', 'athlone');
