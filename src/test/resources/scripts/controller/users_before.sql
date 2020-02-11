@@ -1,0 +1,1 @@
+INSERT IGNORE INTO user_details(id, password, username) VALUES (100, 'athlone', 'lorraine');

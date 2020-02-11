@@ -34,6 +34,9 @@ public class Product {
         this.buyingCost = buyingCost;
     }
 
+    public Product() {
+    }
+
     public Integer getId() {
         return id;
     }
