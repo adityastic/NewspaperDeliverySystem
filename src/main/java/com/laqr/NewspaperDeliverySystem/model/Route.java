@@ -15,6 +15,9 @@ public class Route {
         this.name = name;
     }
 
+    public Route() {
+    }
+
     public Integer getId() {
         return id;
     }

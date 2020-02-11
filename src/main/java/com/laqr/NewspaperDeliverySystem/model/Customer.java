@@ -39,6 +39,9 @@ public class Customer {
         this.holiday = holiday;
     }
 
+    public Customer() {
+    }
+
     public Integer getId() {
         return id;
     }

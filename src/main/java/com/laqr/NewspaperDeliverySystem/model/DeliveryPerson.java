@@ -31,6 +31,9 @@ public class DeliveryPerson {
         this.phoneNumber = phoneNumber;
     }
 
+    public DeliveryPerson() {
+    }
+
     public User getUser() {
         return user;
     }
