@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WebsiteHome {
 
-    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String firstPage(ModelMap model) {
         return "login";
     }
