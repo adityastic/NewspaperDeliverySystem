@@ -26,6 +26,13 @@ public class LoginControllerTests {
                 .param("password", "athlone"))
                 .andExpect(forwardedUrl("/home"));
     }
+    @Test
+    void testAdminCredentials() throws Exception{
+        mvc.perform(post("/login")
+                .param("username","admin")
+                .param("password","admin"))
+                .andExpect(forwardedUrl("/admin/home"));
+    }
 
     @Test
     void testWrongUserCredentials() throws Exception {
