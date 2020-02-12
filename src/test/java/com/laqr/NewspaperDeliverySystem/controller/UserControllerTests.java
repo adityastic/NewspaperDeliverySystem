@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @SpringBootTest
@@ -18,7 +18,7 @@ public class UserControllerTests {
 
     @Test
     void testWrongUserCredentials() throws Exception {
-        mvc.perform(post("/home"))
+        mvc.perform(get("/home"))
                 .andExpect(view().name("user/home"));
     }
 }
