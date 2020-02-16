@@ -32,7 +32,7 @@ public class LoginController {
                 return new ModelAndView("redirect:/admin/home");
             } else if (loginService.checkUser(username, password)) {
                 session.setAttribute("username", username);
-                session.setAttribute("password", username);
+                session.setAttribute("password", password);
                 return new ModelAndView("redirect:/home");
             } else {
                 session.invalidate();
