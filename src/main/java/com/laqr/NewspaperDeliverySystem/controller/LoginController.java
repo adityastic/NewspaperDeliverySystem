@@ -71,4 +71,13 @@ public class LoginController {
         session.invalidate();
         return "redirect:/";
     }
+
+    @GetMapping(value = "/forgotPassword")
+    public String forgotPassword()
+    {
+        return "forgot";
+    }
+
+
+
 }
