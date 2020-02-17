@@ -73,11 +73,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "/forgotPassword")
-    public String forgotPassword()
-    {
+    public String forgotPassword() {
         return "forgot";
     }
-
-
-
 }
