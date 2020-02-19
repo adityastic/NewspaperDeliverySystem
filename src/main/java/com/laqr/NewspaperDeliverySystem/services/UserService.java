@@ -24,4 +24,16 @@ public class UserService {
         }
         return userRepository.findByUsername(username).get();
     }
+
+    public boolean checkUsername(String username, String password){
+        Optional<User> maybeUser = userRepository.findByUsername(username);
+        if(maybeUser.isPresent()) {
+            User user = maybeUser.get();
+            user.setPassword(password);
+            userRepository.save(user);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

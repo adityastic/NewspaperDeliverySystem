@@ -58,7 +58,7 @@ public class LoginController {
             session.setAttribute("password", password);
             return new ModelAndView("redirect:/home");
         } else {
-            redirectAttributes.addFlashAttribute("error", "username and password is incorrect");
+            redirectAttributes.addFlashAttribute("error", "Username and Password is incorrect!");
             return new ModelAndView("redirect:/");
         }
     }
@@ -70,10 +70,5 @@ public class LoginController {
     ) {
         session.invalidate();
         return "redirect:/";
-    }
-
-    @GetMapping(value = "/forgotPassword")
-    public String forgotPassword() {
-        return "forgot";
     }
 }
