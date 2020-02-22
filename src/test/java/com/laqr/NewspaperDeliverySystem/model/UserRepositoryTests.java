@@ -21,7 +21,7 @@ public class UserRepositoryTests {
 
     @Test
     public void insertIntoDatabase() {
-        User user = new User("aditya", "gupta");
+        User user = new User("aditya", "gupta", UserRole.ADMIN);
 
         entityManager.persist(user);
         entityManager.flush();

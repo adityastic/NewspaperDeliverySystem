@@ -30,6 +30,8 @@ public class LoginControllerTests {
     }
 
     @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void testAdminCredentials() throws Exception {
         mvc.perform(post("/login")
                 .param("username", "admin")
