@@ -23,7 +23,7 @@ public class UserService {
         }
     }
 
-    public boolean checkUsername(String username, String password) {
+    public boolean changePassword(String username, String password) {
         Optional<User> maybeUser = userRepository.findByUsername(username);
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();

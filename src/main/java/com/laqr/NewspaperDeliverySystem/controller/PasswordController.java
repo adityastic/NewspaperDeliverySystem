@@ -24,7 +24,7 @@ public class PasswordController {
             RedirectAttributes redirectAttributes,
             @RequestParam("username") String username,
             @RequestParam("password") String password) {
-        if(userService.checkUsername(username,password)){
+        if(userService.changePassword(username,password)){
             redirectAttributes.addFlashAttribute("success", "Password changed, Welcome to Login");
             return "redirect:/";
         }else{
