@@ -184,14 +184,14 @@ public class DeliveryManagerTests {
     @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void detailsCorrect() throws Exception {
         mvc.perform(post("/admin/register-delivery-persons")
-                .param("username", "lorrai@as")
-                .param("password", "1234")
-                .param("full-name", "")
+                .param("username", "adityagupta")
+                .param("password", "123456")
+                .param("full-name", "Aditya Gupta")
                 .param("phone-no", "1234567890")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
                 .andExpect(redirectedUrl("/admin/register-delivery-persons"))
-                .andExpect(flash().attribute("error", "No Full Name Entered"));
+                .andExpect(flash().attribute("success", "Added Delivery Person"));
     }
 }
