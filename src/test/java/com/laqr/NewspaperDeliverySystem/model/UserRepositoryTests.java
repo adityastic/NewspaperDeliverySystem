@@ -26,7 +26,7 @@ public class UserRepositoryTests {
         entityManager.persist(user);
         entityManager.flush();
 
-        User foundUser = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()).get();
+        User foundUser = userRepository.findTopByUsernameAndPassword(user.getUsername(), user.getPassword()).get();
 
         assertThat(foundUser).isEqualTo(user);
     }

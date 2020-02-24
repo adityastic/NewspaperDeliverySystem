@@ -15,12 +15,12 @@ public class LoginService {
     UserRepository userRepository;
 
     public boolean checkUser(String username, String password) {
-        Optional<User> maybeUser = userRepository.findByUsernameAndPassword(username, password);
+        Optional<User> maybeUser = userRepository.findTopByUsernameAndPassword(username, password);
         return maybeUser.isPresent() && maybeUser.get().getType() == UserRole.USER;
     }
 
     public boolean checkAdmin(String username, String password) {
-        Optional<User> maybeUser = userRepository.findByUsernameAndPassword(username, password);
+        Optional<User> maybeUser = userRepository.findTopByUsernameAndPassword(username, password);
         return maybeUser.isPresent() && maybeUser.get().getType() == UserRole.ADMIN;
     }
 }

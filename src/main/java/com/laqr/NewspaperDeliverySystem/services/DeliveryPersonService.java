@@ -18,7 +18,7 @@ public class DeliveryPersonService {
     DeliveryPersonRepository deliveryPersonRepository;
 
     public boolean checkUsername(String username) {
-        return userRepository.findByUsername(username).isPresent();
+        return userRepository.findTopByUsername(username).isPresent();
     }
 
     public void addDeliveryPerson(String username, String password, String fullName, String phoneNo) {
