@@ -11,28 +11,29 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
+
     UserRepository userRepository;
 
     public boolean checkUser(String username, String password) {
-        Optional<User> maybeUser = userRepository.findByUsername(username);
-        return maybeUser.isPresent() && maybeUser.get().getPassword().equals(password);
+        Optional<User> maybeUser = userRepository.findByUsernameAndPassword(username, password);
+        return maybeUser.isPresent();
     }
 
     public User getUser(String username, String password) {
-        if(!checkUser(username,password)){
+        if (!checkUser(username, password)) {
             return null;
         }
-        return userRepository.findByUsername(username).get();
+        return userRepository.findByUsernameAndPassword(username, password).get();
     }
 
-    public boolean checkUsername(String username, String password){
+    public boolean checkUsername(String username, String password) {
         Optional<User> maybeUser = userRepository.findByUsername(username);
-        if(maybeUser.isPresent()) {
+        if (maybeUser.isPresent()) {
             User user = maybeUser.get();
             user.setPassword(password);
             userRepository.save(user);
             return true;
-        }else{
+        } else {
             return false;
         }
     }

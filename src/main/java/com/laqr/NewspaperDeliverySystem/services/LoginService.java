@@ -14,7 +14,7 @@ public class LoginService {
     UserRepository userRepository;
 
     public boolean checkUser(String username, String password) {
-        Optional<User> maybeUser = userRepository.findByUsername(username);
-        return maybeUser.isPresent() && maybeUser.get().getPassword().equals(password);
+        Optional<User> maybeUser = userRepository.findByUsernameAndPassword(username, password);
+        return maybeUser.isPresent();
     }
 }
