@@ -98,4 +98,84 @@ public class DeliveryManagerTests {
                 .andExpect(redirectedUrl("/admin/register-delivery-persons"))
                 .andExpect(flash().attribute("error", "Username should not contain any special characters"));
     }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void passwordNotEntered() throws Exception {
+        mvc.perform(post("/admin/register-delivery-persons")
+                .param("username", "lorrai@as")
+                .param("password", "")
+                .param("full-name", "Lorraine Armitage")
+                .param("phone-no", "0123456789")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/register-delivery-persons"))
+                .andExpect(flash().attribute("error", "No Password Entered"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void passwordLength() throws Exception {
+        mvc.perform(post("/admin/register-delivery-persons")
+                .param("username", "lorrai@as")
+                .param("password", "123")
+                .param("full-name", "Lorraine Armitage")
+                .param("phone-no", "0123456789")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/register-delivery-persons"))
+                .andExpect(flash().attribute("error", "Password should be at least 4"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void phoneNoNotEntered() throws Exception {
+        mvc.perform(post("/admin/register-delivery-persons")
+                .param("username", "lorrai@as")
+                .param("password", "1234")
+                .param("full-name", "Lorraine Armitage")
+                .param("phone-no", "")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/register-delivery-persons"))
+                .andExpect(flash().attribute("error", "No Phone Number Entered"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void phoneNoLength() throws Exception {
+        mvc.perform(post("/admin/register-delivery-persons")
+                .param("username", "lorrai@as")
+                .param("password", "1234")
+                .param("full-name", "Lorraine Armitage")
+                .param("phone-no", "12345")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/register-delivery-persons"))
+                .andExpect(flash().attribute("error", "Phone Number should be of 10 numbers"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void fullNameNotEntered() throws Exception {
+        mvc.perform(post("/admin/register-delivery-persons")
+                .param("username", "lorrai@as")
+                .param("password", "1234")
+                .param("full-name", "")
+                .param("phone-no", "1234567890")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/register-delivery-persons"))
+                .andExpect(flash().attribute("error", "No Full Name Entered"));
+    }
 }

@@ -61,6 +61,7 @@ public class DeliveryManageController {
             return "redirect:/";
 
         if (userRegistrationUtils.checkUserName(username, deliveryPersonService, redirectAttributes) &&
+                userRegistrationUtils.checkFullName(fullName, redirectAttributes) &&
                 userRegistrationUtils.checkPassword(password, redirectAttributes) &&
                 userRegistrationUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
             deliveryPersonService.addDeliveryPerson(username, password, fullName, phoneNo);

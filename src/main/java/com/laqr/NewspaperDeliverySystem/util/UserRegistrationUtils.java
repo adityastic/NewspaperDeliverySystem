@@ -53,6 +53,14 @@ public class UserRegistrationUtils {
         return true;
     }
 
+    public boolean checkFullName(String fullName, RedirectAttributes redirectAttributes) {
+        if (fullName == null || fullName.trim().equals("")) {
+            redirectAttributes.addFlashAttribute("error", "No Full Name Entered");
+            return false;
+        }
+        return true;
+    }
+
     private boolean validUsername(String username) {
         return Pattern.compile("[!@#$%&*()_+=|<>?{}\\\\[\\\\]~-]").matcher(username).find();
     }
@@ -64,5 +72,4 @@ public class UserRegistrationUtils {
     private boolean validLength(String username) {
         return username.length() > 3 && username.length() < 16;
     }
-
 }
