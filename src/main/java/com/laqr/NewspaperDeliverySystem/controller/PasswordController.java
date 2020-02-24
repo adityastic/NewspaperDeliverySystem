@@ -14,12 +14,12 @@ public class PasswordController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/forgotPassword")
+    @GetMapping("/forgot-password")
     public String forgotPasswordPage() {
         return "forgot";
     }
 
-    @PostMapping("/forgotPassword")
+    @PostMapping("/forgot-password")
     public String changePassword(
             RedirectAttributes redirectAttributes,
             @RequestParam("username") String username,

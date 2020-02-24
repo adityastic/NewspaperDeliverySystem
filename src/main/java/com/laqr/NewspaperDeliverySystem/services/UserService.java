@@ -12,7 +12,6 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-
     UserRepository userRepository;
 
     public User getUser(String username, String password) {

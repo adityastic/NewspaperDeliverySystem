@@ -27,8 +27,8 @@ public class LoginController {
                 password != null) {
 
             if (loginService.checkAdmin(username, password)) {
-                session.setAttribute("username", "admin");
-                session.setAttribute("password", "admin");
+                session.setAttribute("username", username);
+                session.setAttribute("password", username);
                 return new ModelAndView("redirect:/admin/home");
             } else if (loginService.checkUser(username, password)) {
                 session.setAttribute("username", username);
@@ -49,9 +49,9 @@ public class LoginController {
             @RequestParam("username") String username,
             @RequestParam("password") String password
     ) {
-        if (username.equals("admin") && password.equals("admin")) {
-            session.setAttribute("username", "admin");
-            session.setAttribute("password", "admin");
+        if (loginService.checkAdmin(username, password)) {
+            session.setAttribute("username", username);
+            session.setAttribute("password", username);
             return new ModelAndView("redirect:/admin/home");
         } else if (loginService.checkUser(username, password)) {
             session.setAttribute("username", username);
