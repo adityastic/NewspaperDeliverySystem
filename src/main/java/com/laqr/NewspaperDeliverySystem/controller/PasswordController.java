@@ -14,22 +14,22 @@ public class PasswordController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/forgotPassword")
+    @GetMapping("/forgot-password")
     public String forgotPasswordPage() {
         return "forgot";
     }
 
-    @PostMapping("/forgotPassword")
+    @PostMapping("/forgot-password")
     public String changePassword(
             RedirectAttributes redirectAttributes,
             @RequestParam("username") String username,
             @RequestParam("password") String password) {
-        if(userService.checkUsername(username,password)){
+        if(userService.changePassword(username,password)){
             redirectAttributes.addFlashAttribute("success", "Password changed, Welcome to Login");
             return "redirect:/";
         }else{
             redirectAttributes.addFlashAttribute("error", "Username not found");
-            return "redirect:/forgotPassword";
+            return "redirect:/forgot-password";
         }
 
     }

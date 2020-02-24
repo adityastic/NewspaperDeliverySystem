@@ -12,11 +12,10 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-
     UserRepository userRepository;
 
     public User getUser(String username, String password) {
-        Optional<User> maybeUser = userRepository.findByUsernameAndPassword(username, password);
+        Optional<User> maybeUser = userRepository.findTopByUsernameAndPassword(username, password);
         if (maybeUser.isPresent() && maybeUser.get().getType() == UserRole.USER) {
             return maybeUser.get();
         } else {
@@ -24,8 +23,8 @@ public class UserService {
         }
     }
 
-    public boolean checkUsername(String username, String password) {
-        Optional<User> maybeUser = userRepository.findByUsername(username);
+    public boolean changePassword(String username, String password) {
+        Optional<User> maybeUser = userRepository.findTopByUsername(username);
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
             user.setPassword(password);
@@ -37,7 +36,7 @@ public class UserService {
     }
 
     public User getAdmin(String username, String password) {
-        Optional<User> maybeUser = userRepository.findByUsernameAndPassword(username, password);
+        Optional<User> maybeUser = userRepository.findTopByUsernameAndPassword(username, password);
         if (maybeUser.isPresent() && maybeUser.get().getType() == UserRole.ADMIN) {
             return maybeUser.get();
         } else {

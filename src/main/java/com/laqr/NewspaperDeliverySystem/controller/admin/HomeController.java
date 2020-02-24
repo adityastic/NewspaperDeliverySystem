@@ -1,4 +1,4 @@
-package com.laqr.NewspaperDeliverySystem.controller;
+package com.laqr.NewspaperDeliverySystem.controller.admin;
 
 import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class AdminController {
+public class HomeController {
 
     @Autowired
     UserService userService;

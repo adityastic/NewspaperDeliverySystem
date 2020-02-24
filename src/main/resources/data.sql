@@ -1,0 +1,1 @@
+insert IGNORE into user_details (id, password, username, type) values (100000, 'admin', 'admin', 'ADMIN');
