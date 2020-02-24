@@ -29,7 +29,7 @@ public class PasswordController {
             return "redirect:/";
         }else{
             redirectAttributes.addFlashAttribute("error", "Username not found");
-            return "redirect:/forgotPassword";
+            return "redirect:/forgot-password";
         }
 
     }

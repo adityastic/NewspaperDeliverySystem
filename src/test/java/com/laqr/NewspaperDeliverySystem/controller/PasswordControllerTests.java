@@ -22,7 +22,7 @@ public class PasswordControllerTests {
     @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void testChangePasswordSuccess() throws Exception {
-        mvc.perform(post("/forgotPassword")
+        mvc.perform(post("/forgot-password")
                 .param("username", "lorraine")
                 .param("password", "lorraine"))
                 .andDo(print())
@@ -32,10 +32,10 @@ public class PasswordControllerTests {
 
     @Test
     void testChangePasswordError() throws Exception {
-        mvc.perform(post("/forgotPassword")
+        mvc.perform(post("/forgot-password")
                 .param("username", "asd")
                 .param("password", "asdas"))
-                .andExpect(redirectedUrl("/forgotPassword"))
+                .andExpect(redirectedUrl("/forgot-password"))
                 .andExpect(flash().attributeExists("error"));
     }
 }
