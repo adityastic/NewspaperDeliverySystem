@@ -26,7 +26,7 @@ public class LoginController {
         if (username != null &&
                 password != null) {
 
-            if (username.equals("admin") && password.equals("admin")) {
+            if (loginService.checkAdmin(username, password)) {
                 session.setAttribute("username", "admin");
                 session.setAttribute("password", "admin");
                 return new ModelAndView("redirect:/admin/home");
