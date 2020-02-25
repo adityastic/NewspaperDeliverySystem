@@ -1,1 +1,3 @@
-FROM maven:3.5-jdk-8
+FROM java:8
+COPY target/newspaper-delivery-system.jar newspaper-delivery-system.jar
+ENTRYPOINT ["java","-jar","newspaper-delivery-system.jar"] 
