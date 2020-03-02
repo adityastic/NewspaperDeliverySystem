@@ -85,14 +85,19 @@
             </div>
             <!-- Navigation -->
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" th:href="@{/admin/home}">
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/register-delivery-persons}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/register-delivery-persons}">
                         <i class="ni ni-circle-08 text-pink"></i> Register
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" th:href="@{/admin/view-route}">
+                        <i class="ni ni-pin-3 text-pink"></i> Routes
                     </a>
                 </li>
             </ul>
@@ -105,7 +110,7 @@
         <div class="container-fluid">
             <!-- Brand -->
             <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-               th:href="@{/admin/register-delivery-persons}">Register Delivery Persons</a>
+               th:href="@{/admin/add-route}">Add Route</a>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
@@ -160,28 +165,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/admin/register-delivery-persons" method="post">
+                <form action="/admin/add-route" method="post">
                     <div class="form-group">
-                        <label for="input-username" class="form-control-label">Username</label>
-                        <input class="form-control" th:value="${usernameStored}" type="text" value="" name="username" placeholder="Enter Username"
-                               id="input-username">
+                        <label for="input-route-name" class="form-control-label">Route</label>
+                        <input class="form-control" th:value="${routeStored}" type="text" value="" name="route-name"
+                               placeholder="Enter Route Name"
+                               id="input-route-name">
                     </div>
-                    <div class="form-group">
-                        <label for="input-full-name" class="form-control-label">Full Name</label>
-                        <input class="form-control" th:value="${fullNameStored}" type="text" name="full-name" placeholder="Enter Full Name"
-                               id="input-full-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-phone-no" class="form-control-label">Phone No</label>
-                        <input class="form-control" th:value="${phoneStored}" type="number" name="phone-no" placeholder="Enter Phone No"
-                               id="input-phone-no">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-password" class="form-control-label">Password</label>
-                        <input class="form-control" th:value="${passwordStored}" type="text" name="password" placeholder="Enter Password"
-                               id="input-password">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Add Delivery Person</button>
+                    <button class="btn btn-primary" type="submit">Add Route</button>
                 </form>
             </div>
         </div>
@@ -219,16 +210,6 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
-
-
-
-
-
-
-
-
-
-
 
 </script>
 </body>

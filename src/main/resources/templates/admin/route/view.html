@@ -85,14 +85,19 @@
             </div>
             <!-- Navigation -->
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" th:href="@{/admin/home}">
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/register-delivery-persons}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/register-delivery-persons}">
                         <i class="ni ni-circle-08 text-pink"></i> Register
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" th:href="@{/admin/view-route}">
+                        <i class="ni ni-pin-3 text-pink"></i> Routes
                     </a>
                 </li>
             </ul>
@@ -105,7 +110,7 @@
         <div class="container-fluid">
             <!-- Brand -->
             <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-               th:href="@{/admin/register-delivery-persons}">Register Delivery Persons</a>
+               th:href="@{/admin/view-route}">Routes</a>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
@@ -139,19 +144,43 @@
     <!-- End Navbar -->
     <!-- Header -->
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+                <!-- Card stats -->
+                <div class="row">
+                    <div class="col-xl-3">
+                    </div>
+                    <div class="col-xl-3">
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <a th:href="@{/admin/add-route}">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Option</h5>
+                                            <span class="h2 font-weight-bold mb-0">Add Route</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                                <i class="fas fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container-fluid mt--7">
         <!-- Table -->
-        <div class="card shadow">
-            <div class="card-body">
-                <div th:if="${error}"
-                     th:inline="text" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                    <span class="alert-text"><strong>Error !</strong> [[${error}]]</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+        <div class="row">
+            <div class="col">
                 <div th:if="${success}"
                      th:inline="text" class="alert alert-success alert-dismissible fade show" role="alert">
                     <span class="alert-icon"><i class="ni ni-like-2"></i></span>
@@ -160,29 +189,73 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/admin/register-delivery-persons" method="post">
-                    <div class="form-group">
-                        <label for="input-username" class="form-control-label">Username</label>
-                        <input class="form-control" th:value="${usernameStored}" type="text" value="" name="username" placeholder="Enter Username"
-                               id="input-username">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Routes Available</h3>
                     </div>
-                    <div class="form-group">
-                        <label for="input-full-name" class="form-control-label">Full Name</label>
-                        <input class="form-control" th:value="${fullNameStored}" type="text" name="full-name" placeholder="Enter Full Name"
-                               id="input-full-name">
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Route</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="route: ${routeList}">
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm" th:text="${route.name}"></span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="text-right">
+                                    <div>
+                                        <button class="btn btn-sm btn-icon-only text-light" role="button"
+                                                aria-haspopup="true" aria-expanded="false">
+                                            <a class="fas fa-pen" th:href="${'/admin/edit-route/' + route.id}"></a>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon-only text-light" role="button"
+                                                aria-haspopup="true" aria-expanded="false" data-toggle="modal"
+                                                th:data-target="${'#modalDel' + route.id}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <div class="modal fade" th:id="${'modalDel' + route.id}" tabindex="-1"
+                                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                            Confirmation</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body" th:inline="text">
+                                                        Are you sure you want to remove route: [[${route.name}]] ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="/admin/delete-route" method="post">
+                                                            <input type="hidden" name="route-id" th:value="${route.id}">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary">Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="form-group">
-                        <label for="input-phone-no" class="form-control-label">Phone No</label>
-                        <input class="form-control" th:value="${phoneStored}" type="number" name="phone-no" placeholder="Enter Phone No"
-                               id="input-phone-no">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-password" class="form-control-label">Password</label>
-                        <input class="form-control" th:value="${passwordStored}" type="text" name="password" placeholder="Enter Password"
-                               id="input-password">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Add Delivery Person</button>
-                </form>
+                </div>
             </div>
         </div>
         <!-- Footer -->
@@ -205,7 +278,6 @@
         </footer>
     </div>
 </div>
-</div>
 <!--   Core   -->
 <script src="/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 <script src="/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -219,11 +291,6 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
-
-
-
-
-
 
 
 
