@@ -31,10 +31,4 @@ public class HomeController {
             return "redirect:/";
         }
     }
-
-    @GetMapping("/admin/add-product")
-    public String adminAdd(){
-        return "admin/product/add";
-    }
-
 }
