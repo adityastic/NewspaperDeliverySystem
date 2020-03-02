@@ -90,8 +90,8 @@
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/register-delivery-persons}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/register-delivery-persons}">
                         <i class="ni ni-circle-08 text-pink"></i> Register
                     </a>
                 </li>
@@ -100,8 +100,8 @@
                         <i class="ni ni-pin-3 text-pink"></i> Routes
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/view-products}">
+                <li class="nav-item active">
+                    <a class="nav-link active" th:href="@{/admin/view-products}">
                         <i class="ni ni-pin-3 text-pink"></i> Products
                     </a>
                 </li>
@@ -115,7 +115,7 @@
         <div class="container-fluid">
             <!-- Brand -->
             <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-               th:href="@{/admin/register-delivery-persons}">Register Delivery Persons</a>
+               th:href="@{/admin/add-product}">Add Product</a>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
@@ -170,28 +170,39 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/admin/register-delivery-persons" method="post">
+                <form action="/admin/add-product" method="post">
                     <div class="form-group">
-                        <label for="input-username" class="form-control-label">Username</label>
-                        <input class="form-control" th:value="${usernameStored}" type="text" value="" name="username" placeholder="Enter Username"
-                               id="input-username">
+                        <label for="input-product-name" class="form-control-label">Product Name</label>
+                        <input class="form-control" type="text" name="product-name"
+                               placeholder="Enter Product Name"
+                               id="input-product-name">
                     </div>
                     <div class="form-group">
-                        <label for="input-full-name" class="form-control-label">Full Name</label>
-                        <input class="form-control" th:value="${fullNameStored}" type="text" name="full-name" placeholder="Enter Full Name"
-                               id="input-full-name">
+                        <label for="input-product-type">Type</label>
+                        <select class="form-control" id="input-product-type">
+                            <option value="NEWSPAPER">NEWSPAPER</option>
+                            <option value="NEWSPAPER">MAGAZINE</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="input-phone-no" class="form-control-label">Phone No</label>
-                        <input class="form-control" th:value="${phoneStored}" type="number" name="phone-no" placeholder="Enter Phone No"
-                               id="input-phone-no">
+                        <label for="input-product-dow" class="form-control-label">Day of Week (1 - Monday to 7 - Sunday)</label>
+                        <input class="form-control" type="number" max="7" min="1" name="product-dow"
+                               placeholder="Enter Day of Week"
+                               id="input-product-dow">
                     </div>
                     <div class="form-group">
-                        <label for="input-password" class="form-control-label">Password</label>
-                        <input class="form-control" th:value="${passwordStored}" type="text" name="password" placeholder="Enter Password"
-                               id="input-password">
+                        <label for="input-product-sc" class="form-control-label">Selling Cost</label>
+                        <input class="form-control" type="number" step="any" name="product-dow"
+                               placeholder="Enter Selling Cost"
+                               id="input-product-sc">
                     </div>
-                    <button class="btn btn-primary" type="submit">Add Delivery Person</button>
+                    <div class="form-group">
+                        <label for="input-product-bc" class="form-control-label">Buying Cost</label>
+                        <input class="form-control" type="number" step="any" name="product-dow"
+                               placeholder="Enter Buying Cost"
+                               id="input-product-bc">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Add Product</button>
                 </form>
             </div>
         </div>
@@ -229,16 +240,6 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
-
-
-
-
-
-
-
-
-
-
 
 </script>
 </body>

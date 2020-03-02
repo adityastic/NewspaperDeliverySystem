@@ -95,13 +95,13 @@
                         <i class="ni ni-circle-08 text-pink"></i> Register
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/view-route}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/view-route}">
                         <i class="ni ni-pin-3 text-pink"></i> Routes
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/view-products}">
+                <li class="nav-item active">
+                    <a class="nav-link active" th:href="@{/admin/view-products}">
                         <i class="ni ni-pin-3 text-pink"></i> Products
                     </a>
                 </li>
@@ -115,7 +115,7 @@
         <div class="container-fluid">
             <!-- Brand -->
             <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-               th:href="@{/admin/view-route}">Routes</a>
+               th:href="@{/admin/view-product}">Products</a>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
@@ -162,11 +162,11 @@
                     <div class="col-xl-3 col-lg-6">
                         <div class="card card-stats mb-4 mb-xl-0">
                             <div class="card-body">
-                                <a th:href="@{/admin/add-route}">
+                                <a th:href="@{/admin/add-product}">
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Option</h5>
-                                            <span class="h2 font-weight-bold mb-0">Add Route</span>
+                                            <span class="h2 font-weight-bold mb-0">Add Product</span>
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -196,22 +196,62 @@
                 </div>
                 <div class="card shadow">
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Routes Available</h3>
+                        <h3 class="mb-0">Products</h3>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                             <tr>
-                                <th scope="col">Route</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Frequency</th>
+                                <th scope="col">Day of Week</th>
+                                <th scope="col">Selling Cost</th>
+                                <th scope="col">Buying Cost</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="route: ${routeList}">
+                            <tr th:each="product: ${productList}">
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <span class="mb-0 text-sm" th:text="${route.name}"></span>
+                                            <span class="mb-0 text-sm" th:text="${product.name}"></span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm" th:text="${product.type}"></span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm" th:text="${product.frequency}"></span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm" th:text="${product.dayOfWeek}"></span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm" th:text="${product.sellingCost}"></span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm" th:text="${product.buyingCost}"></span>
                                         </div>
                                     </div>
                                 </th>
@@ -219,14 +259,14 @@
                                     <div>
                                         <button class="btn btn-sm btn-icon-only text-light" role="button"
                                                 aria-haspopup="true" aria-expanded="false">
-                                            <a class="fas fa-pen" th:href="${'/admin/edit-route/' + route.id}"></a>
+                                            <a class="fas fa-pen" th:href="${'/admin/edit-product/' + product.id}"></a>
                                         </button>
                                         <button class="btn btn-sm btn-icon-only text-light" role="button"
                                                 aria-haspopup="true" aria-expanded="false" data-toggle="modal"
-                                                th:data-target="${'#modalDel' + route.id}">
+                                                th:data-target="${'#modalDel' + product.id}">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
-                                        <div class="modal fade" th:id="${'modalDel' + route.id}" tabindex="-1"
+                                        <div class="modal fade" th:id="${'modalDel' + product.id}" tabindex="-1"
                                              role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -239,11 +279,11 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body" th:inline="text">
-                                                        Are you sure you want to remove route: [[${route.name}]] ?
+                                                        Are you sure you want to remove product: [[${product.name}]] ?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form action="/admin/delete-route" method="post">
-                                                            <input type="hidden" name="route-id" th:value="${route.id}">
+                                                        <form action="/admin/delete-product" method="post">
+                                                            <input type="hidden" name="product-id" th:value="${product.id}">
                                                             <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Close
                                                             </button>
