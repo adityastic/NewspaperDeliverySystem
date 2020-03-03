@@ -1,1 +1,1 @@
-DELETE FROM routes WHERE id = 1;
+DELETE FROM route WHERE id = 1;
