@@ -1,11 +1,9 @@
 package com.laqr.NewspaperDeliverySystem.util;
 
-import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.regex.Pattern;
 
 @Component
 public class RouteUtils {
