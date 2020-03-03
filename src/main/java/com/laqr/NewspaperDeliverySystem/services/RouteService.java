@@ -35,4 +35,8 @@ public class RouteService {
         foundRoute.setName(routeName);
         routeRepository.save(foundRoute);
     }
+
+    public boolean checkRouteName(String routeName) {
+        return routeRepository.findTopByName(routeName).isPresent();
+    }
 }

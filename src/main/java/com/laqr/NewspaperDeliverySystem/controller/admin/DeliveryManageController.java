@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/admin")
 public class DeliveryManageController {
 
     @Autowired
@@ -30,7 +32,7 @@ public class DeliveryManageController {
     @Autowired
     UserRegistrationUtils userRegistrationUtils;
 
-    @GetMapping("/admin/register-delivery-persons")
+    @GetMapping("/register-delivery-persons")
     public String registerDeliveryPersonsHome(
             ModelMap model,
             HttpSession session
@@ -48,7 +50,7 @@ public class DeliveryManageController {
         }
     }
 
-    @PostMapping("/admin/register-delivery-persons")
+    @PostMapping("/register-delivery-persons")
     public String registerDeliveryPersons(
             RedirectAttributes redirectAttributes,
             HttpSession session,

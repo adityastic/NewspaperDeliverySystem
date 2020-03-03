@@ -3,6 +3,7 @@ package com.laqr.NewspaperDeliverySystem.controller.admin.route;
 import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
+import com.laqr.NewspaperDeliverySystem.util.RouteUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +24,9 @@ public class AddRouteController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RouteUtils routeUtils;
 
     @GetMapping("/add-route")
     public String addRouteGet(
@@ -55,10 +59,13 @@ public class AddRouteController {
         if (currentUser == null)
             return "redirect:/";
 
-
-        routeService.addRoute(routeName);
-        redirectAttributes.addFlashAttribute("success","Successfully Added Route");
-
-        return "redirect:/admin/view-route";
+        if(routeUtils.checkRouteName(routeName, routeService, redirectAttributes)){
+            routeService.addRoute(routeName);
+            redirectAttributes.addFlashAttribute("success","Successfully Added Route");
+            return "redirect:/admin/view-route";
+        }else{
+            redirectAttributes.addFlashAttribute("routeStored", routeName);
+            return "redirect:/admin/add-route";
+        }
     }
 }
