@@ -28,6 +28,30 @@ public class RouteControllerTests {
     }
 
     @Test
+    @Sql(scripts = "/scripts/controller/routes_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void routeNameAlreadyExist() throws Exception {
+        mvc.perform(post("/admin/add-route")
+                .param("route-name", "Athlone")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/add-route"))
+                .andExpect(flash().attribute("error", "Route name already exists"));
+    }
+
+    @Test
+    void routeNameNotEntered() throws Exception {
+        mvc.perform(post("/admin/add-route")
+                .param("route-name", "")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/add-route"))
+                .andExpect(flash().attribute("error", "No Route name is Entered"));
+    }
+
+    @Test
     void addRoutePostTest() throws Exception {
         mvc.perform(post("/admin/add-route")
                 .param("route-name", "Dublin")
