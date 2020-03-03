@@ -3,6 +3,7 @@ package com.laqr.NewspaperDeliverySystem.controller.admin.route;
 import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
+import com.laqr.NewspaperDeliverySystem.util.RouteUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +21,9 @@ public class EditRouteController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RouteUtils routeUtils;
 
     @GetMapping("/edit-route/{id}")
     public String editRouteGet(
@@ -56,9 +60,15 @@ public class EditRouteController {
         if (currentUser == null)
             return "redirect:/";
 
-        routeService.editRoute(routeID, routeName);
-        redirectAttributes.addFlashAttribute("success", "Successfully Edited Route ");
-
-        return "redirect:/admin/view-route";
+        if (routeUtils.checkRouteName(routeName, routeService, redirectAttributes)) {
+            routeService.editRoute(routeID, routeName);
+            redirectAttributes.addFlashAttribute("success", "Successfully Edited Route ");
+            return "redirect:/admin/view-route";
+        }else {
+            redirectAttributes.addFlashAttribute("routeStored", routeID);
+            redirectAttributes.addFlashAttribute("routeStored", routeName);
+            return "redirect:/admin/edit-route";
+        }
     }
+
 }
