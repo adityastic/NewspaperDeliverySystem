@@ -17,26 +17,20 @@ public class DeliveryPerson {
     @Column(name = "full_name")
     private String fullName;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "route", referencedColumnName = "id")
-//    private Route route;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "route", referencedColumnName = "id")
+    private Route route;
 
     @Column(name = "phone_no")
     private String phoneNumber;
 
-    public DeliveryPerson(int id, User user, String fullName, String phoneNumber) {
+    public DeliveryPerson(int id, User user, String fullName, Route route, String phoneNumber) {
         this.id = id;
         this.user = user;
         this.fullName = fullName;
+        this.route = route;
         this.phoneNumber = phoneNumber;
     }
-
-//    public DeliveryPerson(User user, String fullName, Route route, Long phoneNumber) {
-//        this.user = user;
-//        this.fullName = fullName;
-//        this.route = route;
-//        this.phoneNumber = phoneNumber;
-//    }
 
     public DeliveryPerson() {
     }
@@ -59,14 +53,14 @@ public class DeliveryPerson {
         return this;
     }
 
-//    public Route getRoute() {
-//        return route;
-//    }
-//
-//    public DeliveryPerson setRoute(Route route) {
-//        this.route = route;
-//        return this;
-//    }
+    public Route getRoute() {
+        return route;
+    }
+
+    public DeliveryPerson setRoute(Route route) {
+        this.route = route;
+        return this;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
