@@ -2,6 +2,7 @@ package com.laqr.NewspaperDeliverySystem.controller.admin;
 
 import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
+import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.UserRegistrationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class DeliveryManageController {
     UserService userService;
 
     @Autowired
+    RouteService routeService;
+
+    @Autowired
     UserRegistrationUtils userRegistrationUtils;
 
     @GetMapping("/register-delivery-persons")
@@ -38,7 +42,8 @@ public class DeliveryManageController {
 
         User currentUser = userService.getAdmin(username, password);
         if (currentUser != null) {
-            model.addAttribute(currentUser);
+            model.addAttribute("user", currentUser);
+            model.addAttribute("routesAvailable", routeService.getAllRoutes());
             return "admin/register";
         } else {
             return "redirect:/";
@@ -52,7 +57,8 @@ public class DeliveryManageController {
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             @RequestParam("full-name") String fullName,
-            @RequestParam("phone-no") String phoneNo
+            @RequestParam("phone-no") String phoneNo,
+            @RequestParam("routeSelected") Integer routeID
     ) {
 
         String currentUsername = (String) session.getAttribute("username");
@@ -66,7 +72,7 @@ public class DeliveryManageController {
                 userRegistrationUtils.checkFullName(fullName, redirectAttributes) &&
                 userRegistrationUtils.checkPassword(password, redirectAttributes) &&
                 userRegistrationUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
-            deliveryPersonService.addDeliveryPerson(username, password, fullName, phoneNo);
+            deliveryPersonService.addDeliveryPerson(username, password, fullName, routeID, phoneNo);
             redirectAttributes.addFlashAttribute("success", "Added Delivery Person");
         } else {
             redirectAttributes.addFlashAttribute("usernameStored", username);

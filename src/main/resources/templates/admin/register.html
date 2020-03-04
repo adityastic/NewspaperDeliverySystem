@@ -191,6 +191,13 @@
                         <input class="form-control" th:value="${passwordStored}" type="text" name="password" placeholder="Enter Password"
                                id="input-password">
                     </div>
+                    <div th:if="${routesAvailable}" class="form-group">
+                        <label for="input-route" class="form-control-label">Delivery Area</label>
+                        <select class="form-control" id="input-route" name="routeSelected">
+                            <option th:each="route : ${routesAvailable}" th:value="${route.id}" th:text="${route.name}">
+                            </option>
+                        </select>
+                    </div>
                     <button class="btn btn-primary" type="submit">Add Delivery Person</button>
                 </form>
             </div>
