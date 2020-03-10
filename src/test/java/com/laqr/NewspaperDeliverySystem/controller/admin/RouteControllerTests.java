@@ -1,4 +1,4 @@
-package com.laqr.NewspaperDeliverySystem.controller.admin.route;
+package com.laqr.NewspaperDeliverySystem.controller.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
