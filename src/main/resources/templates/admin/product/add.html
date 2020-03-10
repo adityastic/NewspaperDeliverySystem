@@ -185,16 +185,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="input-product-name" class="form-control-label">Product Frequency ()</label>
-                        <input class="form-control" type="text" name="product-frequency"
-                               placeholder="Enter Product frequency"
-                               id="input-product-frequency">
+                        <label for="input-product-name" class="form-control-label">Product Frequency</label>
+                        <select class="form-control" id="input-product-frequency" name="product-frequency" onchange="selectionChanged(this);">
+                            <option value="DAILY">DAILY</option>
+                            <option value="WEEKLY">WEEKLY</option>
+                            <option value="MONTHLY">MONTHLY</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="input-product-dow" class="form-control-label">Day of Week (1 - Monday to 7 - Sunday)</label>
-                        <input class="form-control" type="number" max="7" min="1" name="product-dow"
-                               placeholder="Enter Day of Week"
-                               id="input-product-dow">
+                    <div id="checkedState" class="form-group">
                     </div>
                     <div class="form-group">
                         <label for="input-product-sc" class="form-control-label">Selling Cost</label>
@@ -246,6 +244,16 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
+
+    function selectionChanged(that) {
+        if (that.value == "WEEKLY") {
+            document.getElementById("checkedState").innerHTML = '<label for="input-product-weekly" class="form-control-label">Day of Week (1 - Monday to 7 - Sunday)</label> <input class="form-control" type="number" max="7" min="1" name="product-dow" placeholder="Enter Day of Week" id="input-product-weekly">';
+        } else if (that.value == "MONTHLY") {
+            document.getElementById("checkedState").innerHTML = '<label for="input-product-monthly" class="form-control-label">Day of Month (1 to 30 days)</label> <input class="form-control" type="number" max="30" min="1" name="product-dow" placeholder="Enter Day of Month" id="input-product-monthly">';
+        } else {
+            document.getElementById("checkedState").innerHTML = '';
+        }
+    }
 
 </script>
 </body>

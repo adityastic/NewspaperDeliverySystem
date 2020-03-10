@@ -14,7 +14,8 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductType type;
 
-    private String frequency;
+    @Enumerated(EnumType.STRING)
+    private ProductFrequency frequency;
 
     @Column(name = "day_of_week")
     private Integer dayOfWeek;
@@ -37,7 +38,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, ProductType productType, String frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
+    public Product(String productName, ProductType productType, ProductFrequency frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
         this.name = productName;
         this.type = productType;
         this.frequency = frequency;
@@ -73,11 +74,11 @@ public class Product {
         return this;
     }
 
-    public String getFrequency() {
+    public ProductFrequency getFrequency() {
         return frequency;
     }
 
-    public Product setFrequency(String frequency) {
+    public Product setFrequency(ProductFrequency frequency) {
         this.frequency = frequency;
         return this;
     }
