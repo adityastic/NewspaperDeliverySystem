@@ -1,4 +1,4 @@
-package com.laqr.NewspaperDeliverySystem.controller.admin.delivery_manager;
+package com.laqr.NewspaperDeliverySystem.controller.admin.delivery_person;
 
 import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
-public class AddDMController {
+public class AddDPController {
 
     @Autowired
     DeliveryPersonService deliveryPersonService;
@@ -35,20 +35,20 @@ public class AddDMController {
     @Autowired
     UserUtils userUtils;
 
-    @GetMapping("/register-delivery-persons")
-    public String registerDeliveryPersonsHome(
+    @GetMapping("/add-delivery-persons")
+    public String addDeliveryPersonsGet(
             ModelMap model,
             HttpSession session
     ) {
         if (userUtils.isValidAdmin(session, userService, model)) {
             model.addAttribute("routesAvailable", routeService.getAllRoutes());
-            return "admin/register";
+            return "admin/delivery_person/add";
         } else
             return "redirect:/";
     }
 
-    @PostMapping("/register-delivery-persons")
-    public String registerDeliveryPersons(
+    @PostMapping("/add-delivery-persons")
+    public String addDeliveryPersonsPost(
             RedirectAttributes redirectAttributes,
             HttpSession session,
             @RequestParam("username") String username,
@@ -64,13 +64,14 @@ public class AddDMController {
                     userRegistrationUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
                 deliveryPersonService.addDeliveryPerson(username, password, fullName, routeID, phoneNo);
                 redirectAttributes.addFlashAttribute("success", "Added Delivery Person");
+                return "redirect:/admin/view-delivery-persons";
             } else {
                 redirectAttributes.addFlashAttribute("usernameStored", username);
                 redirectAttributes.addFlashAttribute("passwordStored", password);
                 redirectAttributes.addFlashAttribute("phoneStored", phoneNo);
                 redirectAttributes.addFlashAttribute("fullNameStored", fullName);
+                return "redirect:/admin/add-delivery-persons";
             }
-            return "redirect:/admin/register-delivery-persons";
         } else
             return "redirect:/";
     }

@@ -91,8 +91,8 @@
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/register-delivery-persons}">
-                        <i class="ni ni-circle-08 text-pink"></i> Register
+                    <a class="nav-link active" th:href="@{/admin/view-delivery-persons}">
+                        <i class="ni ni-circle-08 text-pink"></i> Delivery Persons
                     </a>
                 </li>
                 <li class="nav-item">
@@ -114,8 +114,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
         <div class="container-fluid">
             <!-- Brand -->
-            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-               th:href="@{/admin/register-delivery-persons}">Register Delivery Persons</a>
+            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Edit Delivery Person</a>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
@@ -170,35 +169,40 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/admin/register-delivery-persons" method="post">
+                <form action="/admin/edit-delivery-persons" method="post">
+                    <div class="form-group">
+                        <label for="input-id" class="form-control-label">DP Id</label>
+                        <input class="form-control" th:value="${dp.id}" type="text" value="" name="username" placeholder="Enter Username"
+                               id="input-id" readonly>
+                    </div>
                     <div class="form-group">
                         <label for="input-username" class="form-control-label">Username</label>
-                        <input class="form-control" th:value="${usernameStored}" type="text" value="" name="username" placeholder="Enter Username"
+                        <input class="form-control" th:value="${dp.user.username}" type="text" value="" name="username" placeholder="Enter Username"
                                id="input-username">
                     </div>
                     <div class="form-group">
                         <label for="input-full-name" class="form-control-label">Full Name</label>
-                        <input class="form-control" th:value="${fullNameStored}" type="text" name="full-name" placeholder="Enter Full Name"
+                        <input class="form-control" th:value="${dp.fullName}" type="text" name="full-name" placeholder="Enter Full Name"
                                id="input-full-name">
                     </div>
                     <div class="form-group">
                         <label for="input-phone-no" class="form-control-label">Phone No</label>
-                        <input class="form-control" th:value="${phoneStored}" type="number" name="phone-no" placeholder="Enter Phone No"
+                        <input class="form-control" th:value="${dp.phoneNumber}" type="number" name="phone-no" placeholder="Enter Phone No"
                                id="input-phone-no">
                     </div>
                     <div class="form-group">
                         <label for="input-password" class="form-control-label">Password</label>
-                        <input class="form-control" th:value="${passwordStored}" type="text" name="password" placeholder="Enter Password"
+                        <input class="form-control" th:value="${dp.user.password}" type="text" name="password" placeholder="Enter Password"
                                id="input-password">
                     </div>
                     <div th:if="${routesAvailable}" class="form-group">
                         <label for="input-route" class="form-control-label">Delivery Area</label>
                         <select class="form-control" id="input-route" name="routeSelected">
-                            <option th:each="route : ${routesAvailable}" th:value="${route.id}" th:text="${route.name}">
+                            <option th:each="route : ${routesAvailable}" th:value="${route.id}" th:text="${route.name}" th:selected="${route == dp.route.name}">
                             </option>
                         </select>
                     </div>
-                    <button class="btn btn-primary" type="submit">Add Delivery Person</button>
+                    <button class="btn btn-primary" type="submit">Edit Delivery Person</button>
                 </form>
             </div>
         </div>
