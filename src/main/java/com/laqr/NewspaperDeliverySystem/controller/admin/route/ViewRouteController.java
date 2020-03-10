@@ -1,8 +1,8 @@
 package com.laqr.NewspaperDeliverySystem.controller.admin.route;
 
-import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
+import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,22 +21,18 @@ public class ViewRouteController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserUtils userUtils;
+
     @GetMapping("/view-route")
     public String viewRoutes(
             ModelMap model,
             HttpSession session
     ) {
-        String username = (String) session.getAttribute("username");
-        String password = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(username, password);
-        if (currentUser != null) {
-            model.addAttribute("user", currentUser);
+        if (userUtils.isValidAdmin(session, userService, model)) {
             model.addAttribute("routeList", routeService.getAllRoutes());
-
             return "admin/route/view";
-        } else {
+        } else
             return "redirect:/";
-        }
     }
 }

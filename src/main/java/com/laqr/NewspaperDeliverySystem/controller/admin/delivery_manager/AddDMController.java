@@ -1,10 +1,10 @@
-package com.laqr.NewspaperDeliverySystem.controller.admin;
+package com.laqr.NewspaperDeliverySystem.controller.admin.delivery_manager;
 
-import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.UserRegistrationUtils;
+import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
-public class DeliveryManageController {
+public class AddDMController {
 
     @Autowired
     DeliveryPersonService deliveryPersonService;
@@ -32,22 +32,19 @@ public class DeliveryManageController {
     @Autowired
     UserRegistrationUtils userRegistrationUtils;
 
+    @Autowired
+    UserUtils userUtils;
+
     @GetMapping("/register-delivery-persons")
     public String registerDeliveryPersonsHome(
             ModelMap model,
             HttpSession session
     ) {
-        String username = (String) session.getAttribute("username");
-        String password = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(username, password);
-        if (currentUser != null) {
-            model.addAttribute("user", currentUser);
+        if (userUtils.isValidAdmin(session, userService, model)) {
             model.addAttribute("routesAvailable", routeService.getAllRoutes());
             return "admin/register";
-        } else {
+        } else
             return "redirect:/";
-        }
     }
 
     @PostMapping("/register-delivery-persons")
@@ -60,27 +57,21 @@ public class DeliveryManageController {
             @RequestParam("phone-no") String phoneNo,
             @RequestParam("routeSelected") Integer routeID
     ) {
-
-        String currentUsername = (String) session.getAttribute("username");
-        String currentPassword = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(currentUsername, currentPassword);
-        if (currentUser == null)
+        if (userUtils.isValidAdmin(session, userService, null)) {
+            if (userRegistrationUtils.checkUserName(username, deliveryPersonService, redirectAttributes) &&
+                    userRegistrationUtils.checkFullName(fullName, redirectAttributes) &&
+                    userRegistrationUtils.checkPassword(password, redirectAttributes) &&
+                    userRegistrationUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
+                deliveryPersonService.addDeliveryPerson(username, password, fullName, routeID, phoneNo);
+                redirectAttributes.addFlashAttribute("success", "Added Delivery Person");
+            } else {
+                redirectAttributes.addFlashAttribute("usernameStored", username);
+                redirectAttributes.addFlashAttribute("passwordStored", password);
+                redirectAttributes.addFlashAttribute("phoneStored", phoneNo);
+                redirectAttributes.addFlashAttribute("fullNameStored", fullName);
+            }
+            return "redirect:/admin/register-delivery-persons";
+        } else
             return "redirect:/";
-
-        if (userRegistrationUtils.checkUserName(username, deliveryPersonService, redirectAttributes) &&
-                userRegistrationUtils.checkFullName(fullName, redirectAttributes) &&
-                userRegistrationUtils.checkPassword(password, redirectAttributes) &&
-                userRegistrationUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
-            deliveryPersonService.addDeliveryPerson(username, password, fullName, routeID, phoneNo);
-            redirectAttributes.addFlashAttribute("success", "Added Delivery Person");
-        } else {
-            redirectAttributes.addFlashAttribute("usernameStored", username);
-            redirectAttributes.addFlashAttribute("passwordStored", password);
-            redirectAttributes.addFlashAttribute("phoneStored", phoneNo);
-            redirectAttributes.addFlashAttribute("fullNameStored", fullName);
-        }
-
-        return "redirect:/admin/register-delivery-persons";
     }
 }
