@@ -37,6 +37,11 @@ jobs:
         shell: bash
         run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
 
+      - name: Push Coverage Report
+        run: bash <(curl -Ls https://coverage.codacy.com/get.sh)
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
 #      - name: Upload JAR
 #        run: ./.github/scripts/upload-jar.sh
 #        env:
