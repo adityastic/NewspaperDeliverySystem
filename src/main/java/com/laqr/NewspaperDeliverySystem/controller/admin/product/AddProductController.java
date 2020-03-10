@@ -54,7 +54,6 @@ public class AddProductController {
             @RequestParam(value = "product-dow", required = false) Integer dayOfWeek,
             @RequestParam("product-sellingCost") Double sellingCost,
             @RequestParam("product-buyingCost") Double buyingCost
-
     ) {
         if (userUtils.isValidAdmin(session, userService, null)) {
             if (productUtils.checkProductName(productName, productService, redirectAttributes)) {

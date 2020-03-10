@@ -190,7 +190,8 @@
                     </div>
                     <div class="form-group">
                         <label for="input-product-name" class="form-control-label">Product Frequency</label>
-                        <select class="form-control" id="input-product-frequency" name="product-frequency" onchange="selectionChanged(this);">
+                        <select class="form-control" id="input-product-frequency" name="product-frequency"
+                                onchange="selectionChanged(this);">
                             <option th:each="i : ${productFrequencies}" th:value="${i}" th:text="${i}"
                                     th:selected="${i == product.frequency}"></option>
                         </select>
@@ -206,6 +207,7 @@
                             } else {
                                 document.write('');
                             }
+
                         </script>
                     </div>
                     <div class="form-group">
@@ -268,6 +270,7 @@
             document.getElementById("checkedState").innerHTML = '';
         }
     }
+
 
 </script>
 </body>

@@ -173,22 +173,26 @@
                 <form action="/admin/add-delivery-persons" method="post">
                     <div class="form-group">
                         <label for="input-username" class="form-control-label">Username</label>
-                        <input class="form-control" th:value="${usernameStored}" type="text" value="" name="username" placeholder="Enter Username"
+                        <input class="form-control" th:value="${usernameStored}" type="text" value="" name="username"
+                               placeholder="Enter Username"
                                id="input-username">
                     </div>
                     <div class="form-group">
                         <label for="input-full-name" class="form-control-label">Full Name</label>
-                        <input class="form-control" th:value="${fullNameStored}" type="text" name="full-name" placeholder="Enter Full Name"
+                        <input class="form-control" th:value="${fullNameStored}" type="text" name="full-name"
+                               placeholder="Enter Full Name"
                                id="input-full-name">
                     </div>
                     <div class="form-group">
                         <label for="input-phone-no" class="form-control-label">Phone No</label>
-                        <input class="form-control" th:value="${phoneStored}" type="number" name="phone-no" placeholder="Enter Phone No"
+                        <input class="form-control" th:value="${phoneStored}" type="number" name="phone-no"
+                               placeholder="Enter Phone No"
                                id="input-phone-no">
                     </div>
                     <div class="form-group">
                         <label for="input-password" class="form-control-label">Password</label>
-                        <input class="form-control" th:value="${passwordStored}" type="text" name="password" placeholder="Enter Password"
+                        <input class="form-control" th:value="${passwordStored}" type="text" name="password"
+                               placeholder="Enter Password"
                                id="input-password">
                     </div>
                     <div th:if="${routesAvailable}" class="form-group">
@@ -236,6 +240,7 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
+
 
 
 

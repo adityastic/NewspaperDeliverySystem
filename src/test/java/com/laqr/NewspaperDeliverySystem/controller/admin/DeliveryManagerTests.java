@@ -229,7 +229,7 @@ public class DeliveryManagerTests {
         mvc.perform(get("/admin/add-delivery-persons")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
-                .andExpect(view().name("admin/register"));
+                .andExpect(view().name("admin/delivery_person/add"));
     }
 
     @Test

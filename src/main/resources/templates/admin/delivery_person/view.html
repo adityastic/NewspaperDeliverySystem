@@ -235,7 +235,8 @@
                                     <div>
                                         <button class="btn btn-sm btn-icon-only text-light" role="button"
                                                 aria-haspopup="true" aria-expanded="false">
-                                            <a class="fas fa-pen" th:href="${'/admin/edit-delivery-persons/' + dp.id}"></a>
+                                            <a class="fas fa-pen"
+                                               th:href="${'/admin/edit-delivery-persons/' + dp.id}"></a>
                                         </button>
                                         <button class="btn btn-sm btn-icon-only text-light" role="button"
                                                 aria-haspopup="true" aria-expanded="false" data-toggle="modal"
@@ -255,7 +256,8 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body" th:inline="text">
-                                                        Are you sure you want to remove delivery person: [[${dp.fullName}]] ?
+                                                        Are you sure you want to remove delivery person:
+                                                        [[${dp.fullName}]] ?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <form action="/admin/delete-delivery-persons" method="post">
@@ -312,6 +314,7 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
       });
+
 
 
 
