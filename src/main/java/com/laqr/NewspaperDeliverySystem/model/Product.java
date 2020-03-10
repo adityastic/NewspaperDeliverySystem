@@ -25,16 +25,25 @@ public class Product {
     @Column(name = "buying_cost")
     private Double buyingCost;
 
-    public Product(String name, ProductType type, String frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
-        this.name = name;
-        this.type = type;
+//    public Product(String name, ProductType type, String frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
+//        this.name = name;
+//        this.type = type;
+//        this.frequency = frequency;
+//        this.dayOfWeek = dayOfWeek;
+//        this.sellingCost = sellingCost;
+//        this.buyingCost = buyingCost;
+//    }
+
+    public Product() {
+    }
+
+    public Product(String productName, ProductType productType, String frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
+        this.name = productName;
+        this.type = productType;
         this.frequency = frequency;
         this.dayOfWeek = dayOfWeek;
         this.sellingCost = sellingCost;
         this.buyingCost = buyingCost;
-    }
-
-    public Product() {
     }
 
     public Integer getId() {

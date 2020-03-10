@@ -179,10 +179,16 @@
                     </div>
                     <div class="form-group">
                         <label for="input-product-type">Type</label>
-                        <select class="form-control" id="input-product-type">
+                        <select class="form-control" id="input-product-type" name="product-type">
                             <option value="NEWSPAPER">NEWSPAPER</option>
-                            <option value="NEWSPAPER">MAGAZINE</option>
+                            <option value="MAGAZINE">MAGAZINE</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-product-name" class="form-control-label">Product Frequency ()</label>
+                        <input class="form-control" type="text" name="product-frequency"
+                               placeholder="Enter Product frequency"
+                               id="input-product-frequency">
                     </div>
                     <div class="form-group">
                         <label for="input-product-dow" class="form-control-label">Day of Week (1 - Monday to 7 - Sunday)</label>
@@ -192,13 +198,13 @@
                     </div>
                     <div class="form-group">
                         <label for="input-product-sc" class="form-control-label">Selling Cost</label>
-                        <input class="form-control" type="number" step="any" name="product-dow"
+                        <input class="form-control" type="number" step="any" name="product-sellingCost"
                                placeholder="Enter Selling Cost"
                                id="input-product-sc">
                     </div>
                     <div class="form-group">
                         <label for="input-product-bc" class="form-control-label">Buying Cost</label>
-                        <input class="form-control" type="number" step="any" name="product-dow"
+                        <input class="form-control" type="number" step="any" name="product-buyingCost"
                                placeholder="Enter Buying Cost"
                                id="input-product-bc">
                     </div>
