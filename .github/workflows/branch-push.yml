@@ -37,8 +37,13 @@ jobs:
         shell: bash
         run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
 
+      - name: Slack Notification
+        uses: adityastic/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      
       - name: Push Coverage Report
-        run: bash <(curl -Ls https://coverage.codacy.com/get.sh)
+        run: cat target/site/jacoco/jacoco.xml && bash <(curl -Ls https://coverage.codacy.com/get.sh)
         env:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
@@ -46,8 +51,3 @@ jobs:
 #        run: ./.github/scripts/upload-jar.sh
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Slack Notification
-        uses: adityastic/action-slack-notify@master
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
