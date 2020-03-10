@@ -1,10 +1,10 @@
 package com.laqr.NewspaperDeliverySystem.controller.admin.product;
 
 import com.laqr.NewspaperDeliverySystem.model.ProductType;
-import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.ProductService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.ProductUtils;
+import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,21 +29,18 @@ public class AddProductController {
     @Autowired
     ProductUtils productUtils;
 
+    @Autowired
+    UserUtils userUtils;
+
     @GetMapping("/add-product")
     public String addProductGet(
             ModelMap model,
             HttpSession session
     ) {
-        String username = (String) session.getAttribute("username");
-        String password = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(username, password);
-        if (currentUser != null) {
-            model.addAttribute(currentUser);
+        if (userUtils.isValidAdmin(session, userService, model))
             return "admin/product/add";
-        } else {
+        else
             return "redirect:/";
-        }
     }
 
     @PostMapping("/add-product")
@@ -58,21 +55,16 @@ public class AddProductController {
             @RequestParam("product-buyingCost") Double buyingCost
 
     ) {
-
-        String currentUsername = (String) session.getAttribute("username");
-        String currentPassword = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(currentUsername, currentPassword);
-        if (currentUser == null)
+        if (userUtils.isValidAdmin(session, userService, null)) {
+            if (productUtils.checkProductName(productName, productService, redirectAttributes)) {
+                productService.addProduct(productName, productType, frequency, dayOfWeek, sellingCost, buyingCost);
+                redirectAttributes.addFlashAttribute("success", "Successfully Added Product");
+                return "redirect:/admin/view-products";
+            } else {
+                redirectAttributes.addFlashAttribute("productStored", productName);
+                return "redirect:/admin/add-product";
+            }
+        } else
             return "redirect:/";
-
-        if(productUtils.checkProductName(productName, productService, redirectAttributes)){
-            productService.addProduct(productName, productType, frequency, dayOfWeek, sellingCost, buyingCost);
-            redirectAttributes.addFlashAttribute("success","Successfully Added Product");
-            return "redirect:/admin/view-products";
-        }else{
-            redirectAttributes.addFlashAttribute("productStored", productName);
-            return "redirect:/admin/add-product";
-        }
     }
 }

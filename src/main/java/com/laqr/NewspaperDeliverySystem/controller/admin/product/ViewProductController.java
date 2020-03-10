@@ -1,8 +1,8 @@
 package com.laqr.NewspaperDeliverySystem.controller.admin.product;
 
-import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.ProductService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
+import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,24 +22,18 @@ public class ViewProductController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserUtils userUtils;
+
     @GetMapping("/view-products")
     public String viewProducts(
             ModelMap model,
             HttpSession session
     ) {
-        String username = (String) session.getAttribute("username");
-        String password = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(username, password);
-        if (currentUser != null) {
-            model.addAttribute("user", currentUser);
+        if (userUtils.isValidAdmin(session, userService, model)) {
             model.addAttribute("productList", productService.getAllProducts());
-
             return "admin/product/view";
-        } else {
+        } else
             return "redirect:/";
-        }
     }
-
-
 }

@@ -1,9 +1,9 @@
 package com.laqr.NewspaperDeliverySystem.controller.admin.route;
 
-import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.RouteUtils;
+import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,21 +28,19 @@ public class AddRouteController {
     @Autowired
     RouteUtils routeUtils;
 
+    @Autowired
+    UserUtils userUtils;
+
     @GetMapping("/add-route")
     public String addRouteGet(
             ModelMap model,
             HttpSession session
     ) {
-        String username = (String) session.getAttribute("username");
-        String password = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(username, password);
-        if (currentUser != null) {
-            model.addAttribute(currentUser);
+        if (userUtils.isValidAdmin(session, userService, model))
             return "admin/route/add";
-        } else {
+        else
             return "redirect:/";
-        }
+
     }
 
     @PostMapping("/add-route")
@@ -51,21 +49,16 @@ public class AddRouteController {
             HttpSession session,
             @RequestParam("route-name") String routeName
     ) {
-
-        String currentUsername = (String) session.getAttribute("username");
-        String currentPassword = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(currentUsername, currentPassword);
-        if (currentUser == null)
+        if (userUtils.isValidAdmin(session, userService, null)) {
+            if (routeUtils.checkRouteName(routeName, routeService, redirectAttributes)) {
+                routeService.addRoute(routeName);
+                redirectAttributes.addFlashAttribute("success", "Successfully Added Route");
+                return "redirect:/admin/view-route";
+            } else {
+                redirectAttributes.addFlashAttribute("routeStored", routeName);
+                return "redirect:/admin/add-route";
+            }
+        } else
             return "redirect:/";
-
-        if(routeUtils.checkRouteName(routeName, routeService, redirectAttributes)){
-            routeService.addRoute(routeName);
-            redirectAttributes.addFlashAttribute("success","Successfully Added Route");
-            return "redirect:/admin/view-route";
-        }else{
-            redirectAttributes.addFlashAttribute("routeStored", routeName);
-            return "redirect:/admin/add-route";
-        }
     }
 }
