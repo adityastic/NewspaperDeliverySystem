@@ -32,7 +32,7 @@ public class ProductService {
         productRepository.deleteById(productID);
     }
 
-    public Product getProductByID(Integer productID) {
+    public Product getProductById(Integer productID) {
         return productRepository.findById(productID).get();
     }
 }

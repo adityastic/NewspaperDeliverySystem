@@ -91,8 +91,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/register-delivery-persons}">
-                        <i class="ni ni-circle-08 text-pink"></i> Register
+                    <a class="nav-link" th:href="@{/admin/view-delivery-persons}">
+                        <i class="ni ni-circle-08 text-pink"></i> Delivery Persons
                     </a>
                 </li>
                 <li class="nav-item">
@@ -186,7 +186,8 @@
                     </div>
                     <div class="form-group">
                         <label for="input-product-name" class="form-control-label">Product Frequency</label>
-                        <select class="form-control" id="input-product-frequency" name="product-frequency" onchange="selectionChanged(this);">
+                        <select class="form-control" id="input-product-frequency" name="product-frequency"
+                                onchange="selectionChanged(this);">
                             <option value="DAILY">DAILY</option>
                             <option value="WEEKLY">WEEKLY</option>
                             <option value="MONTHLY">MONTHLY</option>
@@ -254,6 +255,7 @@
             document.getElementById("checkedState").innerHTML = '';
         }
     }
+
 
 </script>
 </body>
