@@ -1,5 +1,6 @@
 package com.laqr.NewspaperDeliverySystem.controller.admin.product;
 
+import com.laqr.NewspaperDeliverySystem.model.ProductFrequency;
 import com.laqr.NewspaperDeliverySystem.model.ProductType;
 import com.laqr.NewspaperDeliverySystem.services.ProductService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
@@ -49,8 +50,8 @@ public class AddProductController {
             HttpSession session,
             @RequestParam("product-name") String productName,
             @RequestParam("product-type") ProductType productType,
-            @RequestParam("product-frequency") String frequency,
-            @RequestParam("product-dow") Integer dayOfWeek,
+            @RequestParam("product-frequency") ProductFrequency frequency,
+            @RequestParam(value = "product-dow", required = false) Integer dayOfWeek,
             @RequestParam("product-sellingCost") Double sellingCost,
             @RequestParam("product-buyingCost") Double buyingCost
 
