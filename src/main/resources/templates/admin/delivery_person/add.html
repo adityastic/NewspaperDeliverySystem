@@ -90,8 +90,8 @@
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/view-delivery-persons}">
+                <li class="nav-item active">
+                    <a class="nav-link active" th:href="@{/admin/view-delivery-persons}">
                         <i class="ni ni-circle-08 text-pink"></i> Delivery Persons
                     </a>
                 </li>
@@ -100,8 +100,8 @@
                         <i class="ni ni-pin-3 text-pink"></i> Routes
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/view-products}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/view-products}">
                         <i class="ni ni-app"></i> Products
                     </a>
                 </li>
@@ -114,7 +114,8 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
         <div class="container-fluid">
             <!-- Brand -->
-            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Edit Product</a>
+            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
+               th:href="@{/admin/add-delivery-persons}">Add Delivery Persons</a>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
@@ -169,60 +170,39 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/admin/edit-product" method="post">
+                <form action="/admin/add-delivery-persons" method="post">
                     <div class="form-group">
-                        <label for="input-route-id" class="form-control-label">Product ID</label>
-                        <input class="form-control" th:value="${product.id}" type="text" name="route-id"
-                               id="input-route-id" readonly>
+                        <label for="input-username" class="form-control-label">Username</label>
+                        <input class="form-control" th:value="${usernameStored}" type="text" value="" name="username"
+                               placeholder="Enter Username"
+                               id="input-username">
                     </div>
                     <div class="form-group">
-                        <label for="input-product-name" class="form-control-label">Product Name</label>
-                        <input class="form-control" type="text" name="product-name"
-                               placeholder="Enter Product Name" th:value="${product.name}"
-                               id="input-product-name">
+                        <label for="input-full-name" class="form-control-label">Full Name</label>
+                        <input class="form-control" th:value="${fullNameStored}" type="text" name="full-name"
+                               placeholder="Enter Full Name"
+                               id="input-full-name">
                     </div>
                     <div class="form-group">
-                        <label for="input-product-type">Type</label>
-                        <select class="form-control" id="input-product-type" name="product-type">
-                            <option th:each="i : ${productTypes}" th:value="${i}" th:text="${i}"
-                                    th:selected="${i == product.type}"></option>
+                        <label for="input-phone-no" class="form-control-label">Phone No</label>
+                        <input class="form-control" th:value="${phoneStored}" type="number" name="phone-no"
+                               placeholder="Enter Phone No"
+                               id="input-phone-no">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-password" class="form-control-label">Password</label>
+                        <input class="form-control" th:value="${passwordStored}" type="text" name="password"
+                               placeholder="Enter Password"
+                               id="input-password">
+                    </div>
+                    <div th:if="${routesAvailable}" class="form-group">
+                        <label for="input-route" class="form-control-label">Delivery Area</label>
+                        <select class="form-control" id="input-route" name="routeSelected">
+                            <option th:each="route : ${routesAvailable}" th:value="${route.id}" th:text="${route.name}">
+                            </option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="input-product-name" class="form-control-label">Product Frequency</label>
-                        <select class="form-control" id="input-product-frequency" name="product-frequency"
-                                onchange="selectionChanged(this);">
-                            <option th:each="i : ${productFrequencies}" th:value="${i}" th:text="${i}"
-                                    th:selected="${i == product.frequency}"></option>
-                        </select>
-                    </div>
-                    <div id="checkedState" class="form-group">
-                        <script th:inline="javascript">
-                            var value = /*[[${product.frequency}]]*/ '';
-                            var days = /*[[${product.dayOfWeek}]]*/ '';
-                            if (value == "WEEKLY") {
-                                document.write('<label for="input-product-weekly" class="form-control-label">Day of Week (1 - Monday to 7 - Sunday)</label> <input class="form-control" type="number" max="7" min="1" name="product-dow" placeholder="Enter Day of Week" value="' + days + '" id="input-product-weekly">');
-                            } else if (value == "MONTHLY") {
-                                document.write('<label for="input-product-monthly" class="form-control-label">Day of Month (1 to 30 days)</label> <input class="form-control" type="number" max="30" min="1" name="product-dow" placeholder="Enter Day of Month" value="' + days + '" id="input-product-monthly">');
-                            } else {
-                                document.write('');
-                            }
-
-                        </script>
-                    </div>
-                    <div class="form-group">
-                        <label for="input-product-sc" class="form-control-label">Selling Cost</label>
-                        <input class="form-control" type="number" step="any" name="product-sellingCost"
-                               placeholder="Enter Selling Cost" th:value="${product.sellingCost}"
-                               id="input-product-sc">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-product-bc" class="form-control-label">Buying Cost</label>
-                        <input class="form-control" type="number" step="any" name="product-buyingCost"
-                               placeholder="Enter Buying Cost" th:value="${product.buyingCost}"
-                               id="input-product-bc">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Edit Product</button>
+                    <button class="btn btn-primary" type="submit">Add Delivery Person</button>
                 </form>
             </div>
         </div>
@@ -261,15 +241,15 @@
         application: "argon-dashboard-free"
       });
 
-    function selectionChanged(that) {
-        if (that.value == "WEEKLY") {
-            document.getElementById("checkedState").innerHTML = '<label for="input-product-weekly" class="form-control-label">Day of Week (1 - Monday to 7 - Sunday)</label> <input class="form-control" type="number" max="7" min="1" name="product-dow" placeholder="Enter Day of Week" id="input-product-weekly">';
-        } else if (that.value == "MONTHLY") {
-            document.getElementById("checkedState").innerHTML = '<label for="input-product-monthly" class="form-control-label">Day of Month (1 to 30 days)</label> <input class="form-control" type="number" max="30" min="1" name="product-dow" placeholder="Enter Day of Month" id="input-product-monthly">';
-        } else {
-            document.getElementById("checkedState").innerHTML = '';
-        }
-    }
+
+
+
+
+
+
+
+
+
 
 
 </script>

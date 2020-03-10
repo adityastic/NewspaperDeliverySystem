@@ -10,6 +10,8 @@ import com.laqr.NewspaperDeliverySystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DeliveryPersonService {
 
@@ -39,5 +41,13 @@ public class DeliveryPersonService {
                 route,
                 phoneNo);
         deliveryPersonRepository.save(person);
+    }
+
+    public List<DeliveryPerson> getAllDeliveryPersons() {
+        return deliveryPersonRepository.findAll();
+    }
+
+    public DeliveryPerson getDeliveryPersonById(Integer deliveryPersonId) {
+        return deliveryPersonRepository.findById(deliveryPersonId).get();
     }
 }
