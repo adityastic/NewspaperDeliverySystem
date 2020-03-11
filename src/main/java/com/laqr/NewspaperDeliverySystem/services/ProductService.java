@@ -35,4 +35,15 @@ public class ProductService {
     public Product getProductById(Integer productID) {
         return productRepository.findById(productID).get();
     }
+
+    public void editProduct(Integer productID, String productName, ProductType productType, ProductFrequency frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
+        Product foundProduct = productRepository.findById(productID).get();
+        foundProduct.setName(productName);
+        foundProduct.setType(productType);
+        foundProduct.setFrequency(frequency);
+        foundProduct.setDayOfWeek(dayOfWeek);
+        foundProduct.setSellingCost(sellingCost);
+        foundProduct.setBuyingCost(buyingCost);
+        productRepository.save(foundProduct);
+    }
 }
