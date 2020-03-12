@@ -87,7 +87,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRouteGetTest() throws Exception {
-        mvc.perform(get("/admin/edit-route/1")
+        mvc.perform(get("/admin/edit-route/60")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
@@ -98,7 +98,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRouteGetTestWithWrongUser() throws Exception {
-        mvc.perform(get("/admin/edit-route/1")
+        mvc.perform(get("/admin/edit-route/60")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", ""))
                 .andDo(print())
@@ -110,7 +110,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRoutePostTest() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","1")
+                .param("route-id","60")
                 .param("route-name", "Cork")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
@@ -136,12 +136,12 @@ public class RouteControllerTests {
     @Test
     void editRouteNotEntered() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","1")
+                .param("route-id","60")
                 .param("route-name", "")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/admin/edit-route/1"))
+                .andExpect(redirectedUrl("/admin/edit-route/60"))
                 .andExpect(flash().attribute("error", "No Route name is Entered"));
     }
 
@@ -150,7 +150,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRoutePostTestWithLoginFail() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","1")
+                .param("route-id","60")
                 .param("route-name", "Dublin")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", ""))
@@ -163,7 +163,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void deleteRoutePostTest() throws Exception {
         mvc.perform(post("/admin/delete-route")
-                .param("route-id","1")
+                .param("route-id","60")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
@@ -176,7 +176,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void deleteRoutePostTestLoginFail() throws Exception {
         mvc.perform(post("/admin/delete-route")
-                .param("route-id","1")
+                .param("route-id","60")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", ""))
                 .andDo(print())
