@@ -2,7 +2,6 @@ package com.laqr.NewspaperDeliverySystem.controller.admin.product;
 
 import com.laqr.NewspaperDeliverySystem.model.ProductFrequency;
 import com.laqr.NewspaperDeliverySystem.model.ProductType;
-import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.ProductService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.ProductUtils;
@@ -54,32 +53,20 @@ public class EditProductController {
             @RequestParam("product-name") String productName,
             @RequestParam("product-type") ProductType productType,
             @RequestParam("product-frequency") ProductFrequency frequency,
-            @RequestParam("product-dow") Integer dayOfWeek,
+            @RequestParam(value = "product-dow", required = false) Integer dayOfWeek,
             @RequestParam("product-sellingCost") Double sellingCost,
             @RequestParam("product-buyingCost") Double buyingCost
     ) {
-
-        String currentUsername = (String) session.getAttribute("username");
-        String currentPassword = (String) session.getAttribute("password");
-
-        User currentUser = userService.getAdmin(currentUsername, currentPassword);
-        if (currentUser == null)
+        if (userUtils.isValidAdmin(session, userService, null)) {
+            if (productUtils.checkEditProductName(productID, productName, productService, redirectAttributes)) {
+                productService.editProduct(productID, productName, productType, frequency, dayOfWeek, sellingCost, buyingCost);
+                redirectAttributes.addFlashAttribute("success", "Successfully Edited Product ");
+                return "redirect:/admin/view-products";
+            } else {
+                return "redirect:/admin/edit-product/" + productID;
+            }
+        } else
             return "redirect:/";
-
-        if (productUtils.checkProductName(productName, productService, redirectAttributes)) {
-            productService.editProduct(productID, productName, productType, frequency, dayOfWeek, sellingCost, buyingCost);
-            redirectAttributes.addFlashAttribute("success", "Successfully Edited Product ");
-            return "redirect:/admin/view-products";
-        }else {
-            redirectAttributes.addFlashAttribute("productStored", productID);
-            redirectAttributes.addFlashAttribute("productStored", productName);
-            redirectAttributes.addFlashAttribute("productStored", productType);
-            redirectAttributes.addFlashAttribute("productStored", frequency);
-            redirectAttributes.addFlashAttribute("productStored", dayOfWeek);
-            redirectAttributes.addFlashAttribute("productStored", sellingCost);
-            redirectAttributes.addFlashAttribute("productStored", buyingCost);
-            return "redirect:/admin/edit-product";
-        }
     }
 
 }

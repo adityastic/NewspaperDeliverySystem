@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -45,5 +46,10 @@ public class ProductService {
         foundProduct.setSellingCost(sellingCost);
         foundProduct.setBuyingCost(buyingCost);
         productRepository.save(foundProduct);
+    }
+
+    public boolean checkNotThisProductName(Integer productID, String productName) {
+        Optional<Product> maybeUser = productRepository.findTopByName(productName);
+        return maybeUser.isPresent() && maybeUser.get().getId() != productID;
     }
 }
