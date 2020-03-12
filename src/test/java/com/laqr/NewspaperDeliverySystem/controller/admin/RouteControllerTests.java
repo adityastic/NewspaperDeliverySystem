@@ -75,7 +75,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void addRoutePostTest() throws Exception {
         mvc.perform(post("/admin/add-route")
-                .param("route-name", "Dublin")
+                .param("route-name", "Cork")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
@@ -111,7 +111,7 @@ public class RouteControllerTests {
     void editRoutePostTest() throws Exception {
         mvc.perform(post("/admin/edit-route")
                 .param("route-id","1")
-                .param("route-name", "Dublin")
+                .param("route-name", "Cork")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
@@ -124,12 +124,12 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRouteAlreadyExist() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","1")
+                .param("route-id","2")
                 .param("route-name", "Athlone")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/admin/edit-route"))
+                .andExpect(redirectedUrl("/admin/edit-route/2"))
                 .andExpect(flash().attribute("error", "Route name already exists"));
     }
 
@@ -141,7 +141,7 @@ public class RouteControllerTests {
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/admin/edit-route"))
+                .andExpect(redirectedUrl("/admin/edit-route/1"))
                 .andExpect(flash().attribute("error", "No Route name is Entered"));
     }
 
