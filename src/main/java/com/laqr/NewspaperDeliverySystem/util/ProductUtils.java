@@ -18,4 +18,16 @@ public class ProductUtils {
         }
         return true;
     }
+
+    public boolean checkEditProductName(Integer productID, String productName, ProductService productService, RedirectAttributes redirectAttributes) {
+        if (productService.checkNotThisProductName(productID, productName)) {
+            redirectAttributes.addFlashAttribute("error", "Product name already exists");
+            return false;
+        }
+        if (productName == null || productName.trim().equals("")) {
+            redirectAttributes.addFlashAttribute("error", "No Product name is Entered");
+            return false;
+        }
+        return true;
+    }
 }

@@ -49,14 +49,12 @@ public class EditRouteController {
             @RequestParam("route-name") String routeName
     ) {
         if (userUtils.isValidAdmin(session, userService, null)) {
-            if (routeUtils.checkRouteName(routeName, routeService, redirectAttributes)) {
+            if (routeUtils.checkEditRouteName(routeID, routeName, routeService, redirectAttributes)) {
                 routeService.editRoute(routeID, routeName);
                 redirectAttributes.addFlashAttribute("success", "Successfully Edited Route ");
                 return "redirect:/admin/view-route";
             } else {
-                redirectAttributes.addFlashAttribute("routeStored", routeID);
-                redirectAttributes.addFlashAttribute("routeStored", routeName);
-                return "redirect:/admin/edit-route";
+                return "redirect:/admin/edit-route/" + routeID;
             }
         } else
             return "redirect:/";

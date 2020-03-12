@@ -38,9 +38,11 @@ public class AddProductController {
             ModelMap model,
             HttpSession session
     ) {
-        if (userUtils.isValidAdmin(session, userService, model))
+        if (userUtils.isValidAdmin(session, userService, model)) {
+            model.addAttribute("productFrequencies", ProductFrequency.values());
+            model.addAttribute("productTypes", ProductType.values());
             return "admin/product/add";
-        else
+        } else
             return "redirect:/";
     }
 
@@ -61,7 +63,12 @@ public class AddProductController {
                 redirectAttributes.addFlashAttribute("success", "Successfully Added Product");
                 return "redirect:/admin/view-products";
             } else {
-                redirectAttributes.addFlashAttribute("productStored", productName);
+                redirectAttributes.addFlashAttribute("nameStored", productName);
+                redirectAttributes.addFlashAttribute("typeStored", productType);
+                redirectAttributes.addFlashAttribute("frequencyStored", frequency);
+                redirectAttributes.addFlashAttribute("sCStored", sellingCost);
+                redirectAttributes.addFlashAttribute("bCStored", buyingCost);
+                redirectAttributes.addFlashAttribute("dowStored", dayOfWeek);
                 return "redirect:/admin/add-product";
             }
         } else

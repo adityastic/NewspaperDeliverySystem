@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -34,5 +35,21 @@ public class ProductService {
 
     public Product getProductById(Integer productID) {
         return productRepository.findById(productID).get();
+    }
+
+    public void editProduct(Integer productID, String productName, ProductType productType, ProductFrequency frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
+        Product foundProduct = productRepository.findById(productID).get();
+        foundProduct.setName(productName);
+        foundProduct.setType(productType);
+        foundProduct.setFrequency(frequency);
+        foundProduct.setDayOfWeek(dayOfWeek);
+        foundProduct.setSellingCost(sellingCost);
+        foundProduct.setBuyingCost(buyingCost);
+        productRepository.save(foundProduct);
+    }
+
+    public boolean checkNotThisProductName(Integer productID, String productName) {
+        Optional<Product> maybeUser = productRepository.findTopByName(productName);
+        return maybeUser.isPresent() && maybeUser.get().getId() != productID;
     }
 }

@@ -171,9 +171,9 @@
                 </div>
                 <form action="/admin/edit-product" method="post">
                     <div class="form-group">
-                        <label for="input-route-id" class="form-control-label">Product ID</label>
-                        <input class="form-control" th:value="${product.id}" type="text" name="route-id"
-                               id="input-route-id" readonly>
+                        <label for="input-product-id" class="form-control-label">Product ID</label>
+                        <input class="form-control" th:value="${product.id}" type="text" name="product-id"
+                               id="input-product-id" readonly>
                     </div>
                     <div class="form-group">
                         <label for="input-product-name" class="form-control-label">Product Name</label>
@@ -189,7 +189,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="input-product-name" class="form-control-label">Product Frequency</label>
+                        <label for="input-product-frequency" class="form-control-label">Product Frequency</label>
                         <select class="form-control" id="input-product-frequency" name="product-frequency"
                                 onchange="selectionChanged(this);">
                             <option th:each="i : ${productFrequencies}" th:value="${i}" th:text="${i}"

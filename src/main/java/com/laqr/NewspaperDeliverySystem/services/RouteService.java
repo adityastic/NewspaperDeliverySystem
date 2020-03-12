@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RouteService {
@@ -38,5 +39,10 @@ public class RouteService {
 
     public boolean checkRouteName(String routeName) {
         return routeRepository.findTopByName(routeName).isPresent();
+    }
+
+    public boolean checkNotThisRouteName(Integer routeId, String routeName) {
+        Optional<Route> maybeRoute = routeRepository.findTopByName(routeName);
+        return maybeRoute.isPresent() && maybeRoute.get().getId() != routeId;
     }
 }
