@@ -82,7 +82,7 @@
                 <configuration>
                     <excludes>
                         <exclude>com/laqr/NewspaperDeliverySystem/model/**/*</exclude>
-                        <exclude>com/laqr/NewspaperDeliverySystem/NewspaperDeliverySystemApplication.java</exclude>
+                        <exclude>**/*NewspaperDeliverySystemApplication.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
