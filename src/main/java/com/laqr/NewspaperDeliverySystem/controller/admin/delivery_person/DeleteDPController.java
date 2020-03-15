@@ -1,7 +1,6 @@
 package com.laqr.NewspaperDeliverySystem.controller.admin.delivery_person;
 
 import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
-import com.laqr.NewspaperDeliverySystem.services.ProductService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
