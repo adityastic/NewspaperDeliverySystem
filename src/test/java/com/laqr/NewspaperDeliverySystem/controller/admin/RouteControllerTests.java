@@ -110,7 +110,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRoutePostTest() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","60")
+                .param("route-id", "60")
                 .param("route-name", "Cork")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
@@ -124,7 +124,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRouteAlreadyExist() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","2")
+                .param("route-id", "2")
                 .param("route-name", "Athlone")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
@@ -136,7 +136,7 @@ public class RouteControllerTests {
     @Test
     void editRouteNotEntered() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","60")
+                .param("route-id", "60")
                 .param("route-name", "")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
@@ -150,7 +150,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void editRoutePostTestWithLoginFail() throws Exception {
         mvc.perform(post("/admin/edit-route")
-                .param("route-id","60")
+                .param("route-id", "60")
                 .param("route-name", "Dublin")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", ""))
@@ -163,7 +163,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void deleteRoutePostTest() throws Exception {
         mvc.perform(post("/admin/delete-route")
-                .param("route-id","60")
+                .param("route-id", "60")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", "admin"))
                 .andDo(print())
@@ -176,7 +176,7 @@ public class RouteControllerTests {
     @Sql(scripts = "/scripts/controller/routes_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void deleteRoutePostTestLoginFail() throws Exception {
         mvc.perform(post("/admin/delete-route")
-                .param("route-id","60")
+                .param("route-id", "60")
                 .sessionAttr("username", "admin")
                 .sessionAttr("password", ""))
                 .andDo(print())
