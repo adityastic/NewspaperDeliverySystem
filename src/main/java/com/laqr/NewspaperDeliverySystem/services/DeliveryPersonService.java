@@ -55,8 +55,8 @@ public class DeliveryPersonService {
     public boolean checkNotThisUsername(int dpId, String username) {
         Optional<User> maybeUser = userRepository.findTopByUsername(username);
         if (maybeUser.isPresent()) {
-            Optional<DeliveryPerson> maybeDP = deliveryPersonRepository.findTopByUser(maybeUser.get());
-            return maybeDP.isPresent() && maybeDP.get().getId() != dpId;
+            Optional<DeliveryPerson> maybeDP = deliveryPersonRepository.findById(dpId);
+            return maybeDP.isPresent() && maybeDP.get().getId() != maybeUser.get().getId();
         }
         return false;
     }

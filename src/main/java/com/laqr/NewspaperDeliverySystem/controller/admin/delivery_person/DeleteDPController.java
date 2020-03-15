@@ -33,7 +33,7 @@ public class DeleteDPController {
     ) {
         if (userUtils.isValidAdmin(session, userService, null)) {
             deliveryPersonService.deleteDeliveryPerson(dpId);
-            redirectAttributes.addFlashAttribute("success", "Successfully Deleted Product");
+            redirectAttributes.addFlashAttribute("success", "Successfully Deleted Delivery Person");
             return "redirect:/admin/view-delivery-persons";
         } else
             return "redirect:/";

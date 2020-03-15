@@ -18,7 +18,7 @@ public class DeliveryPerson {
     @Column(name = "full_name")
     private String fullName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "route", referencedColumnName = "id")
     @NotNull
     private Route route;

@@ -241,4 +241,147 @@ public class DeliveryPersonsTests {
                 .sessionAttr("password", ""))
                 .andExpect(redirectedUrl("/"));
     }
+
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void viewDPGetTest() throws Exception {
+        mvc.perform(get("/admin/view-delivery-persons")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(view().name("admin/delivery_person/view"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void viewDPGetTestWithLoginFail() throws Exception {
+        mvc.perform(get("/admin/view-delivery-persons")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", ""))
+                .andDo(print())
+                .andExpect(redirectedUrl("/"));
+    }
+
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void deleteDPPostTest() throws Exception {
+        mvc.perform(post("/admin/delete-delivery-persons")
+                .param("dp-id", "100")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/view-delivery-persons"))
+                .andExpect(flash().attribute("success", "Successfully Deleted Delivery Person"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void deleteDPPostTestLoginFail() throws Exception {
+        mvc.perform(post("/admin/delete-delivery-persons")
+                .param("dp-id", "100")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", ""))
+                .andDo(print())
+                .andExpect(redirectedUrl("/"));
+    }
+
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editDPGetTest() throws Exception {
+        mvc.perform(get("/admin/edit-delivery-persons/100")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(view().name("admin/delivery_person/edit"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editDPGetTestWithWrongUser() throws Exception {
+        mvc.perform(get("/admin/edit-delivery-persons/100")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", ""))
+                .andDo(print())
+                .andExpect(redirectedUrl("/"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editRoutePostTest() throws Exception {
+        mvc.perform(post("/admin/edit-delivery-persons")
+                .param("dp-id", "100")
+                .param("username", "Rupal")
+                .param("password", "123456")
+                .param("full-name", "Rupal Singh")
+                .param("phone-no", "1234567890")
+                .param("routeSelected", "10")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/view-delivery-persons"))
+                .andExpect(flash().attribute("success", "Successfully Edited Delivery Person "));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editRoutePostTestWithWrongLogin() throws Exception {
+        mvc.perform(post("/admin/edit-delivery-persons")
+                .param("dp-id", "100")
+                .param("username", "Rupal")
+                .param("password", "123456")
+                .param("full-name", "Rupal Singh")
+                .param("phone-no", "1234567890")
+                .param("routeSelected", "10")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", ""))
+                .andDo(print())
+                .andExpect(redirectedUrl("/"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editRoutePostTestUsernameExists() throws Exception {
+        mvc.perform(post("/admin/edit-delivery-persons")
+                .param("dp-id", "100")
+                .param("username", "aditya")
+                .param("password", "123456")
+                .param("full-name", "Aditya Gupta")
+                .param("phone-no", "1234567890")
+                .param("routeSelected", "10")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/edit-delivery-persons/100"))
+                .andExpect(flash().attribute("error", "Username name already exists"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editRoutePostTestUsernameNotEntered() throws Exception {
+        mvc.perform(post("/admin/edit-delivery-persons")
+                .param("dp-id", "100")
+                .param("username", "")
+                .param("password", "123456")
+                .param("full-name", "Aditya Gupta")
+                .param("phone-no", "1234567890")
+                .param("routeSelected", "10")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/edit-delivery-persons/100"))
+                .andExpect(flash().attribute("error", "No Username is Entered"));
+    }
 }
