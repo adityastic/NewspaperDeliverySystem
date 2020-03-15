@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeliveryPersonService {
@@ -49,5 +50,33 @@ public class DeliveryPersonService {
 
     public DeliveryPerson getDeliveryPersonById(Integer deliveryPersonId) {
         return deliveryPersonRepository.findById(deliveryPersonId).get();
+    }
+
+    public boolean checkNotThisUsername(int dpId, String username) {
+        Optional<User> maybeUser = userRepository.findTopByUsername(username);
+        if (maybeUser.isPresent()) {
+            Optional<DeliveryPerson> maybeDP = deliveryPersonRepository.findTopByUser(maybeUser.get());
+            return maybeDP.isPresent() && maybeDP.get().getId() != dpId;
+        }
+        return false;
+    }
+
+    public void editDeliveryPerson(Integer dpId, String username, String password, String fullName, String phoneNo, Integer routeID) {
+        DeliveryPerson maybePerson = deliveryPersonRepository.findById(dpId).get();
+
+        maybePerson.getUser().setUsername(username);
+        maybePerson.getUser().setPassword(password);
+        maybePerson.setFullName(fullName);
+        maybePerson.setPhoneNumber(phoneNo);
+
+        Route route = routeRepository.findById(routeID).get();
+
+        maybePerson.setRoute(route);
+
+        deliveryPersonRepository.save(maybePerson);
+    }
+
+    public void deleteDeliveryPerson(Integer dpId) {
+        deliveryPersonRepository.deleteById(dpId);
     }
 }

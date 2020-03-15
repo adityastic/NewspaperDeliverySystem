@@ -7,7 +7,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.regex.Pattern;
 
 @Component
-public class UserRegistrationUtils {
+public class DeliveryPersonUtils {
+
+    public boolean checkEditUserName(int dpId, String username, DeliveryPersonService deliveryPersonService, RedirectAttributes redirectAttributes) {
+        if (deliveryPersonService.checkNotThisUsername(dpId, username)) {
+            redirectAttributes.addFlashAttribute("error", "Username name already exists");
+            return false;
+        }
+        if (username == null || username.trim().equals("")) {
+            redirectAttributes.addFlashAttribute("error", "No Username is Entered");
+            return false;
+        }
+        return true;
+    }
 
     public boolean checkUserName(String username, DeliveryPersonService deliveryPersonService, RedirectAttributes redirectAttributes) {
         if (deliveryPersonService.checkUsername(username)) {
