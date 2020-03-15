@@ -3,7 +3,7 @@ package com.laqr.NewspaperDeliverySystem.controller.admin.delivery_person;
 import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
-import com.laqr.NewspaperDeliverySystem.util.UserRegistrationUtils;
+import com.laqr.NewspaperDeliverySystem.util.DeliveryPersonUtils;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class AddDPController {
     RouteService routeService;
 
     @Autowired
-    UserRegistrationUtils userRegistrationUtils;
+    DeliveryPersonUtils deliveryPersonUtils;
 
     @Autowired
     UserUtils userUtils;
@@ -58,10 +58,10 @@ public class AddDPController {
             @RequestParam("routeSelected") Integer routeID
     ) {
         if (userUtils.isValidAdmin(session, userService, null)) {
-            if (userRegistrationUtils.checkUserName(username, deliveryPersonService, redirectAttributes) &&
-                    userRegistrationUtils.checkFullName(fullName, redirectAttributes) &&
-                    userRegistrationUtils.checkPassword(password, redirectAttributes) &&
-                    userRegistrationUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
+            if (deliveryPersonUtils.checkUserName(username, deliveryPersonService, redirectAttributes) &&
+                    deliveryPersonUtils.checkFullName(fullName, redirectAttributes) &&
+                    deliveryPersonUtils.checkPassword(password, redirectAttributes) &&
+                    deliveryPersonUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
                 deliveryPersonService.addDeliveryPerson(username, password, fullName, routeID, phoneNo);
                 redirectAttributes.addFlashAttribute("success", "Added Delivery Person");
                 return "redirect:/admin/view-delivery-persons";
