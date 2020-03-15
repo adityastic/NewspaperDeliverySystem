@@ -63,7 +63,7 @@ public class EditDPController {
                     deliveryPersonUtils.checkPassword(password, redirectAttributes) &&
                     deliveryPersonUtils.checkPhoneNo(phoneNo, redirectAttributes)) {
                 deliveryPersonService.editDeliveryPerson(dpId, username, password, fullName, phoneNo, routeID);
-                redirectAttributes.addFlashAttribute("success", "Successfully Edited Route ");
+                redirectAttributes.addFlashAttribute("success", "Successfully Edited Delivery Person ");
                 return "redirect:/admin/view-delivery-persons";
             } else {
                 return "redirect:/admin/edit-delivery-persons/" + dpId;
