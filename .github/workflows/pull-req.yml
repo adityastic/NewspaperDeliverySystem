@@ -31,4 +31,4 @@ jobs:
         run: ./mvnw spotless:check
 
       - name: Build Project
-        run: ./mvnw -B clean package
+        run: ./mvnw -B clean verify
