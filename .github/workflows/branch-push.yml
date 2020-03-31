@@ -24,6 +24,10 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: Start MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+
       - name: Setup MySQL
         run: mysql -uroot -p'root' -e 'CREATE DATABASE newspaper_delivery;'
 
