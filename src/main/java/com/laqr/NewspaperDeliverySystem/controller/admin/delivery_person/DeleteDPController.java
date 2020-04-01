@@ -3,7 +3,6 @@ package com.laqr.NewspaperDeliverySystem.controller.admin.delivery_person;
 import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +15,15 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class DeleteDPController {
 
-    @Autowired
-    DeliveryPersonService deliveryPersonService;
+    final DeliveryPersonService deliveryPersonService;
+    final UserService userService;
+    final UserUtils userUtils;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    UserUtils userUtils;
+    public DeleteDPController(DeliveryPersonService deliveryPersonService, UserService userService, UserUtils userUtils) {
+        this.deliveryPersonService = deliveryPersonService;
+        this.userService = userService;
+        this.userUtils = userUtils;
+    }
 
     @PostMapping("/delete-delivery-persons")
     public String deleteProduct(

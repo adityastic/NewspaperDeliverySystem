@@ -4,7 +4,6 @@ import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.RouteUtils;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,17 +18,17 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class AddRouteController {
 
-    @Autowired
-    RouteService routeService;
+    final RouteService routeService;
+    final UserService userService;
+    final RouteUtils routeUtils;
+    final UserUtils userUtils;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    RouteUtils routeUtils;
-
-    @Autowired
-    UserUtils userUtils;
+    public AddRouteController(RouteService routeService, UserService userService, RouteUtils routeUtils, UserUtils userUtils) {
+        this.routeService = routeService;
+        this.userService = userService;
+        this.routeUtils = routeUtils;
+        this.userUtils = userUtils;
+    }
 
     @GetMapping("/add-route")
     public String addRouteGet(
