@@ -3,7 +3,6 @@ package com.laqr.NewspaperDeliverySystem.controller.admin.route;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +15,15 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class DeleteRouteController {
 
-    @Autowired
-    RouteService routeService;
+    final RouteService routeService;
+    final UserService userService;
+    final UserUtils userUtils;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    UserUtils userUtils;
+    public DeleteRouteController(RouteService routeService, UserService userService, UserUtils userUtils) {
+        this.routeService = routeService;
+        this.userService = userService;
+        this.userUtils = userUtils;
+    }
 
     @PostMapping("/delete-route")
     public String deleteRoute(

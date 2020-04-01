@@ -4,7 +4,6 @@ import com.laqr.NewspaperDeliverySystem.model.Product;
 import com.laqr.NewspaperDeliverySystem.model.ProductFrequency;
 import com.laqr.NewspaperDeliverySystem.model.ProductType;
 import com.laqr.NewspaperDeliverySystem.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    @Autowired
-    ProductRepository productRepository;
+    final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public void addProduct(String productName, ProductType productType, ProductFrequency frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
         Product newProduct = new Product(productName, productType, frequency, dayOfWeek, sellingCost, buyingCost);

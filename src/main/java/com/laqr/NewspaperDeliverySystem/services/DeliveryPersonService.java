@@ -7,7 +7,6 @@ import com.laqr.NewspaperDeliverySystem.model.UserRole;
 import com.laqr.NewspaperDeliverySystem.repository.DeliveryPersonRepository;
 import com.laqr.NewspaperDeliverySystem.repository.RouteRepository;
 import com.laqr.NewspaperDeliverySystem.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +15,15 @@ import java.util.Optional;
 @Service
 public class DeliveryPersonService {
 
-    @Autowired
-    UserRepository userRepository;
+    final UserRepository userRepository;
+    final RouteRepository routeRepository;
+    final DeliveryPersonRepository deliveryPersonRepository;
 
-    @Autowired
-    RouteRepository routeRepository;
-
-    @Autowired
-    DeliveryPersonRepository deliveryPersonRepository;
+    public DeliveryPersonService(UserRepository userRepository, RouteRepository routeRepository, DeliveryPersonRepository deliveryPersonRepository) {
+        this.userRepository = userRepository;
+        this.routeRepository = routeRepository;
+        this.deliveryPersonRepository = deliveryPersonRepository;
+    }
 
     public boolean checkUsername(String username) {
         return userRepository.findTopByUsername(username).isPresent();
@@ -56,7 +56,7 @@ public class DeliveryPersonService {
         Optional<User> maybeUser = userRepository.findTopByUsername(username);
         if (maybeUser.isPresent()) {
             Optional<DeliveryPerson> maybeDP = deliveryPersonRepository.findById(dpId);
-            return maybeDP.isPresent() && maybeDP.get().getId() != maybeUser.get().getId();
+            return maybeDP.isPresent() && !maybeDP.get().getId().equals(maybeUser.get().getId());
         }
         return false;
     }

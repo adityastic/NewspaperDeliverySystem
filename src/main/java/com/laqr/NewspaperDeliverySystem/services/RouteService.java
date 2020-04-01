@@ -2,7 +2,6 @@ package com.laqr.NewspaperDeliverySystem.services;
 
 import com.laqr.NewspaperDeliverySystem.model.Route;
 import com.laqr.NewspaperDeliverySystem.repository.RouteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Service
 public class RouteService {
 
-    @Autowired
-    RouteRepository routeRepository;
+    final RouteRepository routeRepository;
+
+    public RouteService(RouteRepository routeRepository) {
+        this.routeRepository = routeRepository;
+    }
 
     public void addRoute(String routeName) {
         Route newRoute = new Route(routeName);

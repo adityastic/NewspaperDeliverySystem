@@ -1,7 +1,6 @@
 package com.laqr.NewspaperDeliverySystem.controller;
 
 import com.laqr.NewspaperDeliverySystem.services.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +13,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @Autowired
-    LoginService loginService;
+    final LoginService loginService;
+
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @GetMapping(value = "/")
     public ModelAndView firstPage(

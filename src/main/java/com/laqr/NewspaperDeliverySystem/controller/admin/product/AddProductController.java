@@ -6,7 +6,6 @@ import com.laqr.NewspaperDeliverySystem.services.ProductService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.ProductUtils;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +20,17 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class AddProductController {
 
-    @Autowired
-    ProductService productService;
+    final ProductService productService;
+    final UserService userService;
+    final ProductUtils productUtils;
+    final UserUtils userUtils;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    ProductUtils productUtils;
-
-    @Autowired
-    UserUtils userUtils;
+    public AddProductController(ProductService productService, UserService userService, ProductUtils productUtils, UserUtils userUtils) {
+        this.productService = productService;
+        this.userService = userService;
+        this.productUtils = productUtils;
+        this.userUtils = userUtils;
+    }
 
     @GetMapping("/add-product")
     public String addProductGet(

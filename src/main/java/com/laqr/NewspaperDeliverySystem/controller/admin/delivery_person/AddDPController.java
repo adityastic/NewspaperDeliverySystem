@@ -5,7 +5,6 @@ import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.DeliveryPersonUtils;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,20 +19,19 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class AddDPController {
 
-    @Autowired
-    DeliveryPersonService deliveryPersonService;
+    final DeliveryPersonService deliveryPersonService;
+    final UserService userService;
+    final RouteService routeService;
+    final DeliveryPersonUtils deliveryPersonUtils;
+    final UserUtils userUtils;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    RouteService routeService;
-
-    @Autowired
-    DeliveryPersonUtils deliveryPersonUtils;
-
-    @Autowired
-    UserUtils userUtils;
+    public AddDPController(DeliveryPersonService deliveryPersonService, UserService userService, RouteService routeService, DeliveryPersonUtils deliveryPersonUtils, UserUtils userUtils) {
+        this.deliveryPersonService = deliveryPersonService;
+        this.userService = userService;
+        this.routeService = routeService;
+        this.deliveryPersonUtils = deliveryPersonUtils;
+        this.userUtils = userUtils;
+    }
 
     @GetMapping("/add-delivery-persons")
     public String addDeliveryPersonsGet(
