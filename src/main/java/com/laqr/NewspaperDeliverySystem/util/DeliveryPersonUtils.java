@@ -14,7 +14,7 @@ public class DeliveryPersonUtils {
             redirectAttributes.addFlashAttribute("error", "Username name already exists");
             return false;
         }
-        if (username == null || username.trim().equals("")) {
+        if (username.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Username is Entered");
             return false;
         }
@@ -26,7 +26,7 @@ public class DeliveryPersonUtils {
             redirectAttributes.addFlashAttribute("error", "Username already exists");
             return false;
         }
-        if (username == null || username.trim().equals("")) {
+        if (username.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Username Entered");
             return false;
         }
@@ -42,7 +42,7 @@ public class DeliveryPersonUtils {
     }
 
     public boolean checkPassword(String password, RedirectAttributes redirectAttributes) {
-        if (password == null || password.trim().equals("")) {
+        if (password.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Password Entered");
             return false;
         }
@@ -54,7 +54,7 @@ public class DeliveryPersonUtils {
     }
 
     public boolean checkPhoneNo(String phoneNo, RedirectAttributes redirectAttributes) {
-        if (phoneNo == null || phoneNo.trim().equals("")) {
+        if (phoneNo.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Phone Number Entered");
             return false;
         }
@@ -66,7 +66,7 @@ public class DeliveryPersonUtils {
     }
 
     public boolean checkFullName(String fullName, RedirectAttributes redirectAttributes) {
-        if (fullName == null || fullName.trim().equals("")) {
+        if (fullName.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Full Name Entered");
             return false;
         }

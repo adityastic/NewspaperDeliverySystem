@@ -13,7 +13,7 @@ public class RouteUtils {
             redirectAttributes.addFlashAttribute("error", "Route name already exists");
             return false;
         }
-        if (routeName == null || routeName.trim().equals("")) {
+        if (routeName.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Route name is Entered");
             return false;
         }
@@ -25,7 +25,7 @@ public class RouteUtils {
             redirectAttributes.addFlashAttribute("error", "Route name already exists");
             return false;
         }
-        if (routeName == null || routeName.trim().equals("")) {
+        if (routeName.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Route name is Entered");
             return false;
         }

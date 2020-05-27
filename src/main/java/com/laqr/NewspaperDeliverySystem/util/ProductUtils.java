@@ -12,7 +12,7 @@ public class ProductUtils {
             redirectAttributes.addFlashAttribute("error", "Product name already exists");
             return false;
         }
-        if (productName == null || productName.trim().equals("")) {
+        if (productName.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Product name is Entered");
             return false;
         }
@@ -24,7 +24,7 @@ public class ProductUtils {
             redirectAttributes.addFlashAttribute("error", "Product name already exists");
             return false;
         }
-        if (productName == null || productName.trim().equals("")) {
+        if (productName.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Product name is Entered");
             return false;
         }
