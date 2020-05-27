@@ -3,6 +3,7 @@ package com.laqr.NewspaperDeliverySystem.model;
 import com.mysql.cj.xdevapi.JsonArray;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "customers")
@@ -23,8 +24,9 @@ public class Customer {
     @Column(columnDefinition = "json")
     private JsonArray subscription;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "route", referencedColumnName = "id")
+    @NotNull
     private Route route;
 
     @Column(columnDefinition = "json")
