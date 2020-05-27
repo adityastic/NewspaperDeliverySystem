@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
-public class ViewCusController {
+public class ViewCustomerController {
 
     final CustomerService customerService;
     final UserService userService;
     final UserUtils userUtils;
 
-    public ViewCusController(CustomerService customerService, UserService userService, UserUtils userUtils) {
+    public ViewCustomerController(CustomerService customerService, UserService userService, UserUtils userUtils) {
         this.customerService = customerService;
         this.userService = userService;
         this.userUtils = userUtils;
