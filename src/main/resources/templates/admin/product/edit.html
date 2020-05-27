@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <title>
         NewsAgent Dashboard
     </title>
@@ -22,23 +22,23 @@
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
-                aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#sidenav-collapse-main" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="../index.html">
-            <img src="/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            <img alt="..." class="navbar-brand-img" src="/assets/img/brand/blue.png">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
-                <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-icon" data-toggle="dropdown" href="#"
+                   role="button">
                     <i class="ni ni-bell-55"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
-                     aria-labelledby="navbar-default_dropdown_1">
+                <div aria-labelledby="navbar-default_dropdown_1"
+                     class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <div class="dropdown-divider"></div>
@@ -46,8 +46,8 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown" href="#"
+                   role="button">
                     <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
                 <img alt="Image placeholder" src="/assets/img/theme/team-1-800x800.jpg
@@ -56,7 +56,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    <a th:href="@{/logout}" class="dropdown-item">
+                    <a class="dropdown-item" th:href="@{/logout}">
                         <i class="ni ni-user-run"></i>
                         <span>Logout</span>
                     </a>
@@ -74,9 +74,9 @@
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse"
-                                data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
-                                aria-label="Toggle sidenav">
+                        <button aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav"
+                                class="navbar-toggler" data-target="#sidenav-collapse-main" data-toggle="collapse"
+                                type="button">
                             <span></span>
                             <span></span>
                         </button>
@@ -90,8 +90,8 @@
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/view-delivery-persons}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/view-delivery-persons}">
                         <i class="ni ni-circle-08 text-pink"></i> Delivery Persons
                     </a>
                 </li>
@@ -100,8 +100,8 @@
                         <i class="ni ni-pin-3 text-pink"></i> Routes
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/view-products}">
+                <li class="nav-item active">
+                    <a class="nav-link active" th:href="@{/admin/view-products}">
                         <i class="ni ni-app"></i> Products
                     </a>
                 </li>
@@ -133,17 +133,17 @@
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
-                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link pr-0" data-toggle="dropdown" href="#"
+                       role="button">
                         <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="/assets/img/theme/team-4-800x800.jpg">
                 </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                   <span
+                          class="mb-0 text-sm  font-weight-bold"
                           th:if="${user}"
                           th:inline="text"
-                          class="mb-0 text-sm  font-weight-bold"
                   >
                       [[${user.username}]]
                   </span>
@@ -151,7 +151,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                        <a th:href="@{/logout}" class="dropdown-item">
+                        <a class="dropdown-item" th:href="@{/logout}">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>
@@ -168,50 +168,50 @@
         <!-- Table -->
         <div class="card shadow">
             <div class="card-body">
-                <div th:if="${error}"
-                     th:inline="text" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert" th:if="${error}" th:inline="text">
                     <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                     <span class="alert-text"><strong>Error !</strong> [[${error}]]</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div th:if="${success}"
-                     th:inline="text" class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show"
+                     role="alert" th:if="${success}" th:inline="text">
                     <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                     <span class="alert-text"><strong>Success !</strong> [[${success}]]</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form action="/admin/edit-product" method="post">
                     <div class="form-group">
-                        <label for="input-product-id" class="form-control-label">Product ID</label>
-                        <input class="form-control" th:value="${product.id}" type="text" name="product-id"
-                               id="input-product-id" readonly>
+                        <label class="form-control-label" for="input-product-id">Product ID</label>
+                        <input class="form-control" id="input-product-id" name="product-id" readonly
+                               th:value="${product.id}" type="text">
                     </div>
                     <div class="form-group">
-                        <label for="input-product-name" class="form-control-label">Product Name</label>
-                        <input class="form-control" type="text" name="product-name"
+                        <label class="form-control-label" for="input-product-name">Product Name</label>
+                        <input class="form-control" id="input-product-name" name="product-name"
                                placeholder="Enter Product Name" th:value="${product.name}"
-                               id="input-product-name">
+                               type="text">
                     </div>
                     <div class="form-group">
                         <label for="input-product-type">Type</label>
                         <select class="form-control" id="input-product-type" name="product-type">
-                            <option th:each="i : ${productTypes}" th:value="${i}" th:text="${i}"
-                                    th:selected="${i == product.type}"></option>
+                            <option th:each="i : ${productTypes}" th:selected="${i == product.type}" th:text="${i}"
+                                    th:value="${i}"></option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="input-product-frequency" class="form-control-label">Product Frequency</label>
+                        <label class="form-control-label" for="input-product-frequency">Product Frequency</label>
                         <select class="form-control" id="input-product-frequency" name="product-frequency"
                                 onchange="selectionChanged(this);">
-                            <option th:each="i : ${productFrequencies}" th:value="${i}" th:text="${i}"
-                                    th:selected="${i == product.frequency}"></option>
+                            <option th:each="i : ${productFrequencies}" th:selected="${i == product.frequency}" th:text="${i}"
+                                    th:value="${i}"></option>
                         </select>
                     </div>
-                    <div id="checkedState" class="form-group">
+                    <div class="form-group" id="checkedState">
                         <script th:inline="javascript">
                             var value = /*[[${product.frequency}]]*/ '';
                             var days = /*[[${product.dayOfWeek}]]*/ '';
@@ -226,16 +226,16 @@
                         </script>
                     </div>
                     <div class="form-group">
-                        <label for="input-product-sc" class="form-control-label">Selling Cost</label>
-                        <input class="form-control" type="number" step="any" name="product-sellingCost"
-                               placeholder="Enter Selling Cost" th:value="${product.sellingCost}"
-                               id="input-product-sc">
+                        <label class="form-control-label" for="input-product-sc">Selling Cost</label>
+                        <input class="form-control" id="input-product-sc" name="product-sellingCost" placeholder="Enter Selling Cost"
+                               step="any" th:value="${product.sellingCost}"
+                               type="number">
                     </div>
                     <div class="form-group">
-                        <label for="input-product-bc" class="form-control-label">Buying Cost</label>
-                        <input class="form-control" type="number" step="any" name="product-buyingCost"
-                               placeholder="Enter Buying Cost" th:value="${product.buyingCost}"
-                               id="input-product-bc">
+                        <label class="form-control-label" for="input-product-bc">Buying Cost</label>
+                        <input class="form-control" id="input-product-bc" name="product-buyingCost" placeholder="Enter Buying Cost"
+                               step="any" th:value="${product.buyingCost}"
+                               type="number">
                     </div>
                     <button class="btn btn-primary" type="submit">Edit Product</button>
                 </form>
@@ -249,8 +249,8 @@
                         <div class="copyright text-center text-xl-left text-muted">
                             &copy; 2020
                             <a
-                                    href="https://www.github.com/adityastic/NewspaperDeliverySystem"
                                     class="font-weight-bold ml-1"
+                                    href="https://www.github.com/adityastic/NewspaperDeliverySystem"
                                     target="_blank"
                             >LAQR</a
                             >
@@ -271,10 +271,10 @@
 <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 <script>
     window.TrackJS &&
-      TrackJS.install({
+    TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
-      });
+    });
 
     function selectionChanged(that) {
         if (that.value == "WEEKLY") {

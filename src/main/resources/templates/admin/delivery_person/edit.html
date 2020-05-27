@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <title>
         NewsAgent Dashboard
     </title>
@@ -22,23 +22,23 @@
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
-                aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#sidenav-collapse-main" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="../index.html">
-            <img src="/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            <img alt="..." class="navbar-brand-img" src="/assets/img/brand/blue.png">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
-                <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-icon" data-toggle="dropdown" href="#"
+                   role="button">
                     <i class="ni ni-bell-55"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
-                     aria-labelledby="navbar-default_dropdown_1">
+                <div aria-labelledby="navbar-default_dropdown_1"
+                     class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <div class="dropdown-divider"></div>
@@ -46,8 +46,8 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown" href="#"
+                   role="button">
                     <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
                 <img alt="Image placeholder" src="/assets/img/theme/team-1-800x800.jpg
@@ -56,7 +56,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    <a th:href="@{/logout}" class="dropdown-item">
+                    <a class="dropdown-item" th:href="@{/logout}">
                         <i class="ni ni-user-run"></i>
                         <span>Logout</span>
                     </a>
@@ -74,9 +74,9 @@
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse"
-                                data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
-                                aria-label="Toggle sidenav">
+                        <button aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav"
+                                class="navbar-toggler" data-target="#sidenav-collapse-main" data-toggle="collapse"
+                                type="button">
                             <span></span>
                             <span></span>
                         </button>
@@ -133,17 +133,17 @@
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
-                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link pr-0" data-toggle="dropdown" href="#"
+                       role="button">
                         <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="/assets/img/theme/team-4-800x800.jpg">
                 </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                   <span
+                          class="mb-0 text-sm  font-weight-bold"
                           th:if="${user}"
                           th:inline="text"
-                          class="mb-0 text-sm  font-weight-bold"
                   >
                       [[${user.username}]]
                   </span>
@@ -151,7 +151,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                        <a th:href="@{/logout}" class="dropdown-item">
+                        <a class="dropdown-item" th:href="@{/logout}">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>
@@ -168,58 +168,58 @@
         <!-- Table -->
         <div class="card shadow">
             <div class="card-body">
-                <div th:if="${error}"
-                     th:inline="text" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert" th:if="${error}" th:inline="text">
                     <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                     <span class="alert-text"><strong>Error !</strong> [[${error}]]</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div th:if="${success}"
-                     th:inline="text" class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show"
+                     role="alert" th:if="${success}" th:inline="text">
                     <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                     <span class="alert-text"><strong>Success !</strong> [[${success}]]</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form action="/admin/edit-delivery-persons" method="post">
                     <div class="form-group">
-                        <label for="input-id" class="form-control-label">DP Id</label>
-                        <input class="form-control" th:value="${dp.id}" type="text" value="" name="dp-id"
-                               placeholder="Enter Username"
-                               id="input-id" readonly>
+                        <label class="form-control-label" for="input-id">DP Id</label>
+                        <input class="form-control" id="input-id" name="dp-id" placeholder="Enter Username" readonly
+                               th:value="${dp.id}"
+                               type="text" value="">
                     </div>
                     <div class="form-group">
-                        <label for="input-username" class="form-control-label">Username</label>
-                        <input class="form-control" th:value="${dp.user.username}" type="text" value="" name="username"
-                               placeholder="Enter Username"
-                               id="input-username">
+                        <label class="form-control-label" for="input-username">Username</label>
+                        <input class="form-control" id="input-username" name="username" placeholder="Enter Username" th:value="${dp.user.username}"
+                               type="text"
+                               value="">
                     </div>
                     <div class="form-group">
-                        <label for="input-full-name" class="form-control-label">Full Name</label>
-                        <input class="form-control" th:value="${dp.fullName}" type="text" name="full-name"
-                               placeholder="Enter Full Name"
-                               id="input-full-name">
+                        <label class="form-control-label" for="input-full-name">Full Name</label>
+                        <input class="form-control" id="input-full-name" name="full-name" placeholder="Enter Full Name"
+                               th:value="${dp.fullName}"
+                               type="text">
                     </div>
                     <div class="form-group">
-                        <label for="input-phone-no" class="form-control-label">Phone No</label>
-                        <input class="form-control" th:value="${dp.phoneNumber}" type="number" name="phone-no"
-                               placeholder="Enter Phone No"
-                               id="input-phone-no">
+                        <label class="form-control-label" for="input-phone-no">Phone No</label>
+                        <input class="form-control" id="input-phone-no" name="phone-no" placeholder="Enter Phone No"
+                               th:value="${dp.phoneNumber}"
+                               type="number">
                     </div>
                     <div class="form-group">
-                        <label for="input-password" class="form-control-label">Password</label>
-                        <input class="form-control" th:value="${dp.user.password}" type="text" name="password"
-                               placeholder="Enter Password"
-                               id="input-password">
+                        <label class="form-control-label" for="input-password">Password</label>
+                        <input class="form-control" id="input-password" name="password" placeholder="Enter Password"
+                               th:value="${dp.user.password}"
+                               type="text">
                     </div>
-                    <div th:if="${routesAvailable}" class="form-group">
-                        <label for="input-route" class="form-control-label">Delivery Area</label>
+                    <div class="form-group" th:if="${routesAvailable}">
+                        <label class="form-control-label" for="input-route">Delivery Area</label>
                         <select class="form-control" id="input-route" name="routeSelected">
-                            <option th:each="route : ${routesAvailable}" th:value="${route.id}" th:text="${route.name}"
-                                    th:selected="${route == dp.route.name}">
+                            <option th:each="route : ${routesAvailable}" th:selected="${route == dp.route.name}" th:text="${route.name}"
+                                    th:value="${route.id}">
                             </option>
                         </select>
                     </div>
@@ -235,8 +235,8 @@
                         <div class="copyright text-center text-xl-left text-muted">
                             &copy; 2020
                             <a
-                                    href="https://www.github.com/adityastic/NewspaperDeliverySystem"
                                     class="font-weight-bold ml-1"
+                                    href="https://www.github.com/adityastic/NewspaperDeliverySystem"
                                     target="_blank"
                             >LAQR</a
                             >
@@ -257,20 +257,10 @@
 <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 <script>
     window.TrackJS &&
-      TrackJS.install({
+    TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-dashboard-free"
-      });
-
-
-
-
-
-
-
-
-
-
+    });
 
 
 </script>

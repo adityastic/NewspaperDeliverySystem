@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <title>
         NewsAgent Dashboard
     </title>
@@ -22,23 +22,23 @@
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
-                aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#sidenav-collapse-main" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="../index.html">
-            <img src="/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            <img alt="..." class="navbar-brand-img" src="/assets/img/brand/blue.png">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
-                <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-icon" data-toggle="dropdown" href="#"
+                   role="button">
                     <i class="ni ni-bell-55"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
-                     aria-labelledby="navbar-default_dropdown_1">
+                <div aria-labelledby="navbar-default_dropdown_1"
+                     class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <div class="dropdown-divider"></div>
@@ -46,8 +46,8 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown" href="#"
+                   role="button">
                     <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
                 <img alt="Image placeholder" src="/assets/img/theme/team-1-800x800.jpg
@@ -56,7 +56,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    <a th:href="@{/logout}" class="dropdown-item">
+                    <a class="dropdown-item" th:href="@{/logout}">
                         <i class="ni ni-user-run"></i>
                         <span>Logout</span>
                     </a>
@@ -74,9 +74,9 @@
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse"
-                                data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
-                                aria-label="Toggle sidenav">
+                        <button aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav"
+                                class="navbar-toggler" data-target="#sidenav-collapse-main" data-toggle="collapse"
+                                type="button">
                             <span></span>
                             <span></span>
                         </button>
@@ -90,8 +90,8 @@
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" th:href="@{/admin/view-delivery-persons}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/view-delivery-persons}">
                         <i class="ni ni-circle-08 text-pink"></i> Delivery Persons
                     </a>
                 </li>
@@ -105,8 +105,8 @@
                         <i class="ni ni-app"></i> Products
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/view-customers}">
+                <li class="nav-item active">
+                    <a class="nav-link active" th:href="@{/admin/view-customers}">
                         <i class="ni ni-delivery-fast"></i> Customers
                     </a>
                 </li>
@@ -134,17 +134,17 @@
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
-                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link pr-0" data-toggle="dropdown" href="#"
+                       role="button">
                         <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="/assets/img/theme/team-4-800x800.jpg">
                 </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                   <span
+                          class="mb-0 text-sm  font-weight-bold"
                           th:if="${user}"
                           th:inline="text"
-                          class="mb-0 text-sm  font-weight-bold"
                   >
                       [[${user.username}]]
                   </span>
@@ -152,7 +152,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                        <a th:href="@{/logout}" class="dropdown-item">
+                        <a class="dropdown-item" th:href="@{/logout}">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>
@@ -188,19 +188,19 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-first-name">Full Name</label>
-                                            <input type="text" id="input-first-name"
-                                                   class="form-control form-control-alternative"
+                                            <input class="form-control form-control-alternative" id="input-first-name"
                                                    name="full-name"
-                                                   placeholder="Aditya Gupta">
+                                                   placeholder="Aditya Gupta"
+                                                   type="text">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="input-phone-no" class="form-control-label">Phone No</label>
-                                            <input class="form-control form-control-alternative" type="number"
+                                            <label class="form-control-label" for="input-phone-no">Phone No</label>
+                                            <input class="form-control form-control-alternative" id="input-phone-no"
                                                    name="phone-no"
                                                    placeholder="9012300120"
-                                                   id="input-phone-no">
+                                                   type="number">
                                         </div>
                                     </div>
                                 </div>
@@ -210,10 +210,10 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-address">Address</label>
-                                            <textarea rows="4" class="form-control form-control-alternative"
-                                                      id="input-address"
+                                            <textarea class="form-control form-control-alternative" id="input-address"
                                                       name="address"
-                                                      placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"></textarea>
+                                                      placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                                                      rows="4"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -223,12 +223,12 @@
                             <h6 class="heading-small text-muted mb-4">Subscriptions</h6>
                             <div style="padding: 0.5em 1em 0.5em 1em" th:if="${allProducts.size()} > 0">
                                 <div class="row" th:each="index: ${#numbers.sequence(0, allProducts.size(), 5)}">
-                                    <div th:if="${index} < ${allProducts.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index} < ${allProducts.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'check' + allProducts.get(index).id}"
                                                name="subscription[]"
+                                               th:id="${'check' + allProducts.get(index).id}"
                                                th:value="${allProducts.get(index).id}"
                                                type="checkbox"/>
                                         <label class="custom-control-label"
@@ -236,12 +236,12 @@
                                             <span class="text-muted" th:text="${allProducts.get(index).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 1} < ${allProducts.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 1} < ${allProducts.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'check' + allProducts.get(index + 1).id}"
                                                name="subscription[]"
+                                               th:id="${'check' + allProducts.get(index + 1).id}"
                                                th:value="${allProducts.get(index + 1).id}"
                                                type="checkbox"/>
                                         <label class="custom-control-label"
@@ -250,12 +250,12 @@
                                                   th:text="${allProducts.get(index + 1).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 2} < ${allProducts.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 2} < ${allProducts.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'check' + allProducts.get(index + 2).id}"
                                                name="subscription[]"
+                                               th:id="${'check' + allProducts.get(index + 2).id}"
                                                th:value="${allProducts.get(index + 2).id}"
                                                type="checkbox"/>
                                         <label class="custom-control-label"
@@ -264,12 +264,12 @@
                                                   th:text="${allProducts.get(index + 2).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 3} < ${allProducts.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 3} < ${allProducts.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'check' + allProducts.get(index + 3).id}"
                                                name="subscription[]"
+                                               th:id="${'check' + allProducts.get(index + 3).id}"
                                                th:value="${allProducts.get(index + 3).id}"
                                                type="checkbox"/>
                                         <label class="custom-control-label"
@@ -278,12 +278,12 @@
                                                   th:text="${allProducts.get(index + 3).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 4} < ${allProducts.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-checkbox"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 4} < ${allProducts.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'check' + allProducts.get(index + 4).id}"
                                                name="subscription[]"
+                                               th:id="${'check' + allProducts.get(index + 4).id}"
                                                th:value="${allProducts.get(index + 4).id}"
                                                type="checkbox"/>
                                         <label class="custom-control-label"
@@ -299,12 +299,12 @@
                             <h6 class="heading-small text-muted mb-4">Routes</h6>
                             <div style="padding: 0.5em 1em 0.5em 1em" th:if="${allRoutes.size()} > 0">
                                 <div class="row" th:each="index: ${#numbers.sequence(0, allRoutes.size(), 5)}">
-                                    <div th:if="${index} < ${allRoutes.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-radio"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-radio"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index} < ${allRoutes.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'radio' + allRoutes.get(index).id}"
                                                name="routeSelected"
+                                               th:id="${'radio' + allRoutes.get(index).id}"
                                                th:value="${allRoutes.get(index).id}"
                                                type="radio"/>
                                         <label class="custom-control-label"
@@ -312,12 +312,12 @@
                                             <span class="text-muted" th:text="${allRoutes.get(index).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 1} < ${allRoutes.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-radio"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-radio"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 1} < ${allRoutes.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'radio' + allRoutes.get(index + 1).id}"
                                                name="routeSelected"
+                                               th:id="${'radio' + allRoutes.get(index + 1).id}"
                                                th:value="${allRoutes.get(index + 1).id}"
                                                type="radio"/>
                                         <label class="custom-control-label"
@@ -325,12 +325,12 @@
                                             <span class="text-muted" th:text="${allRoutes.get(index + 1).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 2} < ${allRoutes.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-radio"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-radio"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 2} < ${allRoutes.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'radio' + allRoutes.get(index + 2).id}"
                                                name="routeSelected"
+                                               th:id="${'radio' + allRoutes.get(index + 2).id}"
                                                th:value="${allRoutes.get(index + 2).id}"
                                                type="radio"/>
                                         <label class="custom-control-label"
@@ -338,12 +338,12 @@
                                             <span class="text-muted" th:text="${allRoutes.get(index + 2).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 3} < ${allRoutes.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-radio"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-radio"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 3} < ${allRoutes.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'radio' + allRoutes.get(index + 3).id}"
                                                name="routeSelected"
+                                               th:id="${'radio' + allRoutes.get(index + 3).id}"
                                                th:value="${allRoutes.get(index + 3).id}"
                                                type="radio"/>
                                         <label class="custom-control-label"
@@ -351,12 +351,12 @@
                                             <span class="text-muted" th:text="${allRoutes.get(index + 3).name}"></span>
                                         </label>
                                     </div>
-                                    <div th:if="${index + 4} < ${allRoutes.size()}"
-                                         class="col-lg-2 custom-control custom-control-alternative custom-radio"
-                                         style="display: inline; margin: 0.5rem">
+                                    <div class="col-lg-2 custom-control custom-control-alternative custom-radio"
+                                         style="display: inline; margin: 0.5rem"
+                                         th:if="${index + 4} < ${allRoutes.size()}">
                                         <input class="custom-control-input"
-                                               th:id="${'radio' + allRoutes.get(index + 4).id}"
                                                name="routeSelected"
+                                               th:id="${'radio' + allRoutes.get(index + 4).id}"
                                                th:value="${allRoutes.get(index + 4).id}"
                                                type="radio"/>
                                         <label class="custom-control-label"
@@ -380,25 +380,25 @@
             <div class="row align-items-center justify-content-xl-between">
                 <div class="col-xl-6">
                     <div class="copyright text-center text-xl-left text-muted">
-                        &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
+                        &copy; 2018 <a class="font-weight-bold ml-1" href="https://www.creative-tim.com"
                                        target="_blank">Creative Tim</a>
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <ul class="nav nav-footer justify-content-center justify-content-xl-end">
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+                            <a class="nav-link" href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About
+                            <a class="nav-link" href="https://www.creative-tim.com/presentation" target="_blank">About
                                 Us</a>
                         </li>
                         <li class="nav-item">
-                            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+                            <a class="nav-link" href="http://blog.creative-tim.com" target="_blank">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-                               class="nav-link" target="_blank">MIT License</a>
+                            <a class="nav-link"
+                               href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" target="_blank">MIT License</a>
                         </li>
                     </ul>
                 </div>
