@@ -4,6 +4,7 @@ import com.laqr.NewspaperDeliverySystem.services.CustomerService;
 import com.laqr.NewspaperDeliverySystem.services.ProductService;
 import com.laqr.NewspaperDeliverySystem.services.RouteService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
+import com.laqr.NewspaperDeliverySystem.util.CustomerUtils;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,13 +26,15 @@ public class AddCustomerController {
     final RouteService routeService;
     final ProductService productService;
     final UserUtils userUtils;
+    final CustomerUtils customerUtils;
 
-    public AddCustomerController(CustomerService customerService, UserService userService, RouteService routeService, ProductService productService, UserUtils userUtils) {
+    public AddCustomerController(CustomerService customerService, UserService userService, RouteService routeService, ProductService productService, UserUtils userUtils, CustomerUtils customerUtils) {
         this.customerService = customerService;
         this.userService = userService;
         this.routeService = routeService;
         this.productService = productService;
         this.userUtils = userUtils;
+        this.customerUtils = customerUtils;
     }
 
     @GetMapping("/add-customer")
@@ -53,12 +56,23 @@ public class AddCustomerController {
             HttpSession session,
             @RequestParam("full-name") String fullName,
             @RequestParam("phone-no") String phoneNo,
-            @RequestParam("subscription[]") List<Integer> subscriptions,
-            @RequestParam("routeSelected") Integer routeSelected
+            @RequestParam("address") String address,
+            @RequestParam(value = "subscription[]", required = false) List<Integer> subscriptions,
+            @RequestParam(value = "routeSelected", required = false) Integer routeSelected
     ) {
         if (userUtils.isValidAdmin(session, userService, null)) {
-            System.out.println(subscriptions);
-            return "redirect:/admin/view-customers";
+            if (customerUtils.checkCustomer(fullName, phoneNo, address, subscriptions, routeSelected, redirectAttributes)) {
+                customerService.addCustomer(fullName, phoneNo, address, subscriptions, routeSelected);
+                redirectAttributes.addFlashAttribute("success", "Added Customer!");
+                return "redirect:/admin/view-customers";
+            } else {
+                redirectAttributes.addFlashAttribute("fullNameStored", fullName);
+                redirectAttributes.addFlashAttribute("addressStored", address);
+                redirectAttributes.addFlashAttribute("phoneStored", phoneNo);
+                redirectAttributes.addFlashAttribute("subscriptionsStored", subscriptions);
+                redirectAttributes.addFlashAttribute("routeStored", routeSelected);
+                return "redirect:/admin/add-customer";
+            }
         } else
             return "redirect:/";
     }
