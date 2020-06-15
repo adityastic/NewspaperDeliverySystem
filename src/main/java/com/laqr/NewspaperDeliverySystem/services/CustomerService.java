@@ -30,4 +30,8 @@ public class CustomerService {
                 routeRepository.getOne(routeSelected),
                 null));
     }
+
+    public void deleteCustomer(Integer customerId) {
+        customerRepository.deleteById(customerId);
+    }
 }
