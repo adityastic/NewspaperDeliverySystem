@@ -1,7 +1,6 @@
 package com.laqr.NewspaperDeliverySystem.controller.admin.customer;
 
 import com.laqr.NewspaperDeliverySystem.services.CustomerService;
-import com.laqr.NewspaperDeliverySystem.services.DeliveryPersonService;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.stereotype.Controller;
