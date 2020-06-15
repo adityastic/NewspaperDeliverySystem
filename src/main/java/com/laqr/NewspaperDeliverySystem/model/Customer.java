@@ -1,6 +1,5 @@
 package com.laqr.NewspaperDeliverySystem.model;
 
-import com.mysql.cj.xdevapi.JsonArray;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
