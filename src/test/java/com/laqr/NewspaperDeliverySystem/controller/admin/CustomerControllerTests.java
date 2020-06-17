@@ -185,4 +185,29 @@ public class CustomerControllerTests {
                 .andExpect(redirectedUrl("/admin/add-customer"))
                 .andExpect(flash().attribute("error", "Select one route"));
     }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void deleteCustomerPostFailedTest() throws Exception {
+        mvc.perform(post("/admin/delete-customer")
+                .param("customer-id", "10001")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", ""))
+                .andDo(print())
+                .andExpect(redirectedUrl("/"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void deleteCustomerPostTest() throws Exception {
+        mvc.perform(post("/admin/delete-customer")
+                .param("customer-id", "10001")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/view-customers"))
+                .andExpect(flash().attribute("success", "Successfully Deleted Customer"));
+    }
 }
