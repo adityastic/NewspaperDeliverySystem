@@ -244,8 +244,6 @@ public class DeliveryPersonControllerTests {
 
 
     @Test
-    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void viewDPGetTest() throws Exception {
         mvc.perform(get("/admin/view-delivery-persons")
                 .sessionAttr("username", "admin")
@@ -255,8 +253,6 @@ public class DeliveryPersonControllerTests {
     }
 
     @Test
-    @Sql(scripts = "/scripts/controller/users_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(scripts = "/scripts/controller/users_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void viewDPGetTestWithLoginFail() throws Exception {
         mvc.perform(get("/admin/view-delivery-persons")
                 .sessionAttr("username", "admin")
