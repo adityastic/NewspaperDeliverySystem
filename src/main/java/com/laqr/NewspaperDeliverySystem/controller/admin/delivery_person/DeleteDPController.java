@@ -26,7 +26,7 @@ public class DeleteDPController {
     }
 
     @PostMapping("/delete-delivery-persons")
-    public String deleteProduct(
+    public String deleteDeliveryPerson(
             RedirectAttributes redirectAttributes,
             HttpSession session,
             @RequestParam("dp-id") Integer dpId

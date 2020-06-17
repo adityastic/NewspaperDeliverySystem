@@ -33,7 +33,7 @@ public class DeliveryPersonService {
         User user = new User(username, password, UserRole.USER);
         userRepository.save(user);
 
-        Route route = routeRepository.findById(routeID).get();
+        Route route = routeRepository.getOne(routeID);
 
         DeliveryPerson person = new DeliveryPerson(
                 user.getId(),
@@ -49,7 +49,7 @@ public class DeliveryPersonService {
     }
 
     public DeliveryPerson getDeliveryPersonById(Integer deliveryPersonId) {
-        return deliveryPersonRepository.findById(deliveryPersonId).get();
+        return deliveryPersonRepository.getOne(deliveryPersonId);
     }
 
     public boolean checkNotThisUsername(int dpId, String username) {
@@ -62,14 +62,14 @@ public class DeliveryPersonService {
     }
 
     public void editDeliveryPerson(Integer dpId, String username, String password, String fullName, String phoneNo, Integer routeID) {
-        DeliveryPerson maybePerson = deliveryPersonRepository.findById(dpId).get();
+        DeliveryPerson maybePerson = deliveryPersonRepository.getOne(dpId);
 
         maybePerson.getUser().setUsername(username);
         maybePerson.getUser().setPassword(password);
         maybePerson.setFullName(fullName);
         maybePerson.setPhoneNumber(phoneNo);
 
-        Route route = routeRepository.findById(routeID).get();
+        Route route = routeRepository.getOne(routeID);
 
         maybePerson.setRoute(route);
 

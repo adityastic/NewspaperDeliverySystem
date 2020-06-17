@@ -45,7 +45,7 @@ public class EditDPController {
     }
 
     @PostMapping("/edit-delivery-persons")
-    public String editRoutePost(
+    public String editDeliveryPersonsPost(
             RedirectAttributes redirectAttributes,
             HttpSession session,
             @RequestParam("dp-id") Integer dpId,

@@ -8,10 +8,7 @@ import com.laqr.NewspaperDeliverySystem.util.CustomerUtils;
 import com.laqr.NewspaperDeliverySystem.util.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class AddCustomerController {
+public class EditCustomerController {
 
     final CustomerService customerService;
     final UserService userService;
@@ -28,7 +25,7 @@ public class AddCustomerController {
     final UserUtils userUtils;
     final CustomerUtils customerUtils;
 
-    public AddCustomerController(CustomerService customerService, UserService userService, RouteService routeService, ProductService productService, UserUtils userUtils, CustomerUtils customerUtils) {
+    public EditCustomerController(CustomerService customerService, UserService userService, RouteService routeService, ProductService productService, UserUtils userUtils, CustomerUtils customerUtils) {
         this.customerService = customerService;
         this.userService = userService;
         this.routeService = routeService;
@@ -37,23 +34,26 @@ public class AddCustomerController {
         this.customerUtils = customerUtils;
     }
 
-    @GetMapping("/add-customer")
-    public String addCustomerGet(
+    @GetMapping("/edit-customer/{id}")
+    public String editCustomerGet(
             ModelMap model,
-            HttpSession session
+            HttpSession session,
+            @PathVariable("id") Integer customerId
     ) {
         if (userUtils.isValidAdmin(session, userService, model)) {
+            model.addAttribute("customer", customerService.getCustomerById(customerId));
             model.addAttribute("allRoutes", routeService.getAllRoutes());
             model.addAttribute("allProducts", productService.getAllProducts());
-            return "admin/customer/add";
+            return "admin/customer/edit";
         } else
             return "redirect:/";
     }
 
-    @PostMapping("/add-customer")
-    public String addCustomerPost(
+    @PostMapping("/edit-customer")
+    public String editCustomerPost(
             RedirectAttributes redirectAttributes,
             HttpSession session,
+            @RequestParam("customer-id") Integer customerId,
             @RequestParam("full-name") String fullName,
             @RequestParam("phone-no") String phoneNo,
             @RequestParam("address") String address,
@@ -62,17 +62,12 @@ public class AddCustomerController {
             @RequestParam(value = "holidays[]", required = false) List<String> holidays
     ) {
         if (userUtils.isValidAdmin(session, userService, null)) {
-            if (customerUtils.checkCustomer(fullName, phoneNo, address, subscriptions, routeSelected, holidays, redirectAttributes)) {
-                customerService.addCustomer(fullName, phoneNo, address, subscriptions, routeSelected);
-                redirectAttributes.addFlashAttribute("success", "Added Customer!");
+            if (customerUtils.checkEditedCustomer(customerId, fullName, phoneNo, address, subscriptions, routeSelected, holidays, customerService, redirectAttributes)) {
+                customerService.editCustomer(customerId, fullName, phoneNo, address, subscriptions, routeSelected, holidays);
+                redirectAttributes.addFlashAttribute("success", "Successfully Edited Customer");
                 return "redirect:/admin/view-customers";
             } else {
-                redirectAttributes.addFlashAttribute("fullNameStored", fullName);
-                redirectAttributes.addFlashAttribute("addressStored", address);
-                redirectAttributes.addFlashAttribute("phoneStored", phoneNo);
-                redirectAttributes.addFlashAttribute("subscriptionsStored", subscriptions);
-                redirectAttributes.addFlashAttribute("routeStored", routeSelected);
-                return "redirect:/admin/add-customer";
+                return "redirect:/admin/edit-customer/" + customerId;
             }
         } else
             return "redirect:/";

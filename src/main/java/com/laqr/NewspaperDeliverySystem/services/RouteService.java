@@ -30,11 +30,11 @@ public class RouteService {
     }
 
     public Route getRouteById(int routeID) {
-        return routeRepository.findById(routeID).get();
+        return routeRepository.getOne(routeID);
     }
 
     public void editRoute(Integer routeID, String routeName) {
-        Route foundRoute = routeRepository.findById(routeID).get();
+        Route foundRoute = routeRepository.getOne(routeID);
         foundRoute.setName(routeName);
         routeRepository.save(foundRoute);
     }

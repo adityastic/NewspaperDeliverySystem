@@ -36,11 +36,11 @@ public class ProductService {
     }
 
     public Product getProductById(Integer productID) {
-        return productRepository.findById(productID).get();
+        return productRepository.getOne(productID);
     }
 
     public void editProduct(Integer productID, String productName, ProductType productType, ProductFrequency frequency, Integer dayOfWeek, Double sellingCost, Double buyingCost) {
-        Product foundProduct = productRepository.findById(productID).get();
+        Product foundProduct = productRepository.getOne(productID);
         foundProduct.setName(productName);
         foundProduct.setType(productType);
         foundProduct.setFrequency(frequency);
