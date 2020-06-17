@@ -210,4 +210,96 @@ public class CustomerControllerTests {
                 .andExpect(redirectedUrl("/admin/view-customers"))
                 .andExpect(flash().attribute("success", "Successfully Deleted Customer"));
     }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editCustomerGetTest() throws Exception {
+        mvc.perform(get("/admin/edit-customer/10001")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andExpect(view().name("admin/customer/edit"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editCustomerGetFailedTest() throws Exception {
+        mvc.perform(get("/admin/edit-customer/10001")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", ""))
+                .andExpect(redirectedUrl("/"));
+    }
+
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editCustomerPostIncorrectLoginTest() throws Exception {
+        mvc.perform(post("/admin/edit-customer")
+                .param("customer-id", "10001")
+                .param("full-name", "Aditya Gupta")
+                .param("phone-no", "1231231222")
+                .param("address", "ASDASD")
+                .param("subscription[]", "10000")
+                .param("routeSelected", "10000")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", ""))
+                .andDo(print())
+                .andExpect(redirectedUrl("/"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editCustomerPostCorrectTest() throws Exception {
+        mvc.perform(post("/admin/edit-customer")
+                .param("customer-id", "10001")
+                .param("full-name", "Aditya Gupta")
+                .param("phone-no", "1231231222")
+                .param("address", "ASDASD")
+                .param("subscription[]", "10000")
+                .param("routeSelected", "10000")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/view-customers"))
+                .andExpect(flash().attribute("success", "Successfully Edited Customer"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editCustomerPostSameListTest() throws Exception {
+        mvc.perform(post("/admin/edit-customer")
+                .param("customer-id", "10001")
+                .param("full-name", "Aditya Gupta")
+                .param("phone-no", "1231231224")
+                .param("address", "ASDASD")
+                .param("subscription[]", "10000,10001")
+                .param("routeSelected", "10000")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/view-customers"))
+                .andExpect(flash().attribute("success", "Successfully Edited Customer"));
+    }
+
+    @Test
+    @Sql(scripts = "/scripts/controller/customer_before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/scripts/controller/customer_after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void editCustomerPostNoFullNameTest() throws Exception {
+        mvc.perform(post("/admin/edit-customer")
+                .param("customer-id", "10001")
+                .param("full-name", "")
+                .param("phone-no", "1231231224")
+                .param("address", "ASDASD")
+                .param("subscription[]", "10000,10001")
+                .param("routeSelected", "10000")
+                .sessionAttr("username", "admin")
+                .sessionAttr("password", "admin"))
+                .andDo(print())
+                .andExpect(redirectedUrl("/admin/edit-customer/10001"))
+                .andExpect(flash().attribute("error", "No Full Name Entered"));
+    }
 }

@@ -44,9 +44,7 @@ public class CustomerUtils {
     }
 
     public boolean checkEditedCustomer(Integer customerId, String fullName, String phoneNo, String address, List<Integer> subscriptions, Integer routeSelected, List<String> holidays, CustomerService customerService, RedirectAttributes redirectAttributes) {
-        if (customerService.ifCustomerNotPresent(customerId, fullName, phoneNo, address, subscriptions, routeSelected, holidays))
-            return true;
-
-        return checkCustomer(fullName, phoneNo, address, subscriptions, routeSelected, holidays, redirectAttributes);
+        return customerService.ifCustomerNotPresent(customerId, fullName, phoneNo, address, subscriptions, routeSelected, holidays)
+            && checkCustomer(fullName, phoneNo, address, subscriptions, routeSelected, holidays, redirectAttributes);
     }
 }
