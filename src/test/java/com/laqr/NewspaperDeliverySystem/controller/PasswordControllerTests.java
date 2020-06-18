@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -37,5 +38,11 @@ public class PasswordControllerTests {
                 .param("password", "asdas"))
                 .andExpect(redirectedUrl("/forgot-password"))
                 .andExpect(flash().attributeExists("error"));
+    }
+
+    @Test
+    void testChangePassword() throws Exception {
+        mvc.perform(get("/forgot-password"))
+                .andExpect(view().name("forgot"));
     }
 }

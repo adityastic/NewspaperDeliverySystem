@@ -7,14 +7,26 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.regex.Pattern;
 
 @Component
-public class UserRegistrationUtils {
+public class DeliveryPersonUtils {
+
+    public boolean checkEditUserName(int dpId, String username, DeliveryPersonService deliveryPersonService, RedirectAttributes redirectAttributes) {
+        if (deliveryPersonService.checkNotThisUsername(dpId, username)) {
+            redirectAttributes.addFlashAttribute("error", "Username name already exists");
+            return false;
+        }
+        if (username.trim().equals("")) {
+            redirectAttributes.addFlashAttribute("error", "No Username is Entered");
+            return false;
+        }
+        return true;
+    }
 
     public boolean checkUserName(String username, DeliveryPersonService deliveryPersonService, RedirectAttributes redirectAttributes) {
         if (deliveryPersonService.checkUsername(username)) {
             redirectAttributes.addFlashAttribute("error", "Username already exists");
             return false;
         }
-        if (username == null || username.trim().equals("")) {
+        if (username.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Username Entered");
             return false;
         }
@@ -30,7 +42,7 @@ public class UserRegistrationUtils {
     }
 
     public boolean checkPassword(String password, RedirectAttributes redirectAttributes) {
-        if (password == null || password.trim().equals("")) {
+        if (password.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Password Entered");
             return false;
         }
@@ -42,7 +54,7 @@ public class UserRegistrationUtils {
     }
 
     public boolean checkPhoneNo(String phoneNo, RedirectAttributes redirectAttributes) {
-        if (phoneNo == null || phoneNo.trim().equals("")) {
+        if (phoneNo.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Phone Number Entered");
             return false;
         }
@@ -54,7 +66,7 @@ public class UserRegistrationUtils {
     }
 
     public boolean checkFullName(String fullName, RedirectAttributes redirectAttributes) {
-        if (fullName == null || fullName.trim().equals("")) {
+        if (fullName.trim().equals("")) {
             redirectAttributes.addFlashAttribute("error", "No Full Name Entered");
             return false;
         }

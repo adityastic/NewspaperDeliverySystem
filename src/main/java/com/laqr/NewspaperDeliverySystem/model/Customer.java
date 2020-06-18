@@ -1,11 +1,16 @@
 package com.laqr.NewspaperDeliverySystem.model;
 
-import com.mysql.cj.xdevapi.JsonArray;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 public class Customer {
 
     @Id
@@ -20,17 +25,18 @@ public class Customer {
     @Column(name = "phone_no")
     private Integer phoneNo;
 
-    @Column(columnDefinition = "json")
-    private JsonArray subscription;
+    @Type(type = "json")
+    private List<Integer> subscription;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "route", referencedColumnName = "id")
+    @NotNull
     private Route route;
 
-    @Column(columnDefinition = "json")
-    private JsonArray holiday;
+    @Type(type = "json")
+    private List<String> holiday;
 
-    public Customer(String fullName, String address, Integer phoneNo, JsonArray subscription, Route route, JsonArray holiday) {
+    public Customer(String fullName, String address, Integer phoneNo, List<Integer> subscription, Route route, List<String> holiday) {
         this.fullName = fullName;
         this.address = address;
         this.phoneNo = phoneNo;
@@ -78,11 +84,11 @@ public class Customer {
         return this;
     }
 
-    public JsonArray getSubscription() {
+    public List<Integer> getSubscription() {
         return subscription;
     }
 
-    public Customer setSubscription(JsonArray subscription) {
+    public Customer setSubscription(List<Integer> subscription) {
         this.subscription = subscription;
         return this;
     }
@@ -96,11 +102,11 @@ public class Customer {
         return this;
     }
 
-    public JsonArray getHoliday() {
+    public List<String> getHoliday() {
         return holiday;
     }
 
-    public Customer setHoliday(JsonArray holiday) {
+    public Customer setHoliday(List<String> holiday) {
         this.holiday = holiday;
         return this;
     }

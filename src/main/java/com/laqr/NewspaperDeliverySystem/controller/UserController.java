@@ -2,7 +2,6 @@ package com.laqr.NewspaperDeliverySystem.controller;
 
 import com.laqr.NewspaperDeliverySystem.model.User;
 import com.laqr.NewspaperDeliverySystem.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +11,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/home")
     public String firstPage(

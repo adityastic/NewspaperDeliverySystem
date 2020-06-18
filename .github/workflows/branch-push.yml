@@ -25,7 +25,9 @@ jobs:
           java-version: 1.8
 
       - name: Setup MySQL
-        run: mysql -uroot -p'root' -e 'CREATE DATABASE newspaper_delivery;'
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -uroot -p'root' -e 'CREATE DATABASE newspaper_delivery;'
 
       - name: Check Code Format
         run: ./mvnw spotless:check
@@ -37,12 +39,17 @@ jobs:
         shell: bash
         run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
 
-#      - name: Upload JAR
-#        run: ./.github/scripts/upload-jar.sh
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Slack Notification
         uses: adityastic/action-slack-notify@master
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      
+      - name: Push Coverage Report
+        run: bash <(curl -s https://codecov.io/bash)
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+#      - name: Upload JAR
+#        run: ./.github/scripts/upload-jar.sh
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

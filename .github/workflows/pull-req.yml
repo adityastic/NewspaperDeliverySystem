@@ -25,10 +25,12 @@ jobs:
           java-version: 1.8
 
       - name: Setup MySQL
-        run: mysql -uroot -p'root' -e 'CREATE DATABASE newspaper_delivery;'
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -uroot -p'root' -e 'CREATE DATABASE newspaper_delivery;'
 
       - name: Check Code Format
         run: ./mvnw spotless:check
 
       - name: Build Project
-        run: ./mvnw -B clean package
+        run: ./mvnw -B clean verify
