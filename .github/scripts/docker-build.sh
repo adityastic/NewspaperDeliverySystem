@@ -8,4 +8,3 @@ docker tag newspaper-delivery-system:latest "$DOCKER_USERNAME"/newspaper-deliver
 docker tag newspaper-delivery-system:latest "$DOCKER_USERNAME"/newspaper-delivery-system:"$REL_VER"
 docker push "$DOCKER_USERNAME"/newspaper-delivery-system:latest
 docker push "$DOCKER_USERNAME"/newspaper-delivery-system:"$REL_VER"
-docker images
