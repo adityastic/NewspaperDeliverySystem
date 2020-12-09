@@ -19,11 +19,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-
-
-
-
-
       - name: Setup MySQL
         run: |
           sudo /etc/init.d/mysql start
@@ -37,7 +32,7 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_ENV
 
       - name: Docker Build and Deploy on Packages
         run: ./.github/scripts/docker-build-branch.sh
